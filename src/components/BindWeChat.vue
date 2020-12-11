@@ -2,22 +2,20 @@
   <div>
     <h1 class="title">绑定微信</h1>
     <h5 class="sub_title">无授权码请联系管理员开通授权码</h5>
-    <XInput class="input" type="text" placeholder="请输入授权码" />
-    <Button class="login">登陆</Button>
+    <XInput class="input" type="text" placeholder="请输入授权码"/>
+    <Button class="login" @click="login">登陆</Button>
     <div class="privacy_agreement">
-      <span>登录即表示同意</span> <a style="color: #1890FF" href="http://www.baidu.com">《用户隐私服务协议》</a>
+      <span>登录即表示同意</span> <a style="color: #1890FF" href="http://www.silverwind.tech:45080/privacy/app/privacy-agreement.html">《用户隐私服务协议》</a>
     </div>
 
   </div>
 </template>
 
 <script>
-import {Cell, Group, XInput} from 'vux'
+import {XInput} from 'vux'
 
 export default {
   components: {
-    Group,
-    Cell,
     XInput
   },
   data() {
@@ -28,7 +26,13 @@ export default {
       // its initial state.
       msg: 'Hello World!'
     }
-  }
+  }, methods: {
+    login: function () {
+      this.$router.push('/Registration')
+      // alert("123")
+    }
+  },
+
 }
 </script>
 
@@ -43,9 +47,10 @@ export default {
   margin-left: 30px;
   color: #404040;
 }
-.input{
+
+.input {
   width: 80%;
-  margin-top: 80px;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -56,16 +61,16 @@ export default {
   background-color: #1890FF;
   color: white;
   border: white;
-  margin-top: 100px;
+  margin-top: 60px;
   margin-left: auto;
   margin-right: auto;
   width: 90%;
-  height: 50px;
+  height: 40px;
   display: block;
 }
 
 .privacy_agreement {
-  margin-top: 100px;
+  margin-top: 70px;
   text-align: center;
 }
 </style>
