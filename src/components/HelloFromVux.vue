@@ -1,9 +1,8 @@
 <template>
   <div>
-
     <h1 class="title">绑定微信</h1>
     <h5 class="sub_title">无授权码请联系管理员开通授权码</h5>
-    <input alt="请数据">
+    <XInput class="input" type="text" placeholder="请输入授权码" />
     <Button class="login">登陆</Button>
     <div class="privacy_agreement">
       <span>登录即表示同意</span> <a style="color: #1890FF" href="http://www.baidu.com">《用户隐私服务协议》</a>
@@ -13,12 +12,13 @@
 </template>
 
 <script>
-import {Cell, Group} from 'vux'
+import {Cell, Group, XInput} from 'vux'
 
 export default {
   components: {
     Group,
-    Cell
+    Cell,
+    XInput
   },
   data() {
     return {
@@ -43,8 +43,12 @@ export default {
   margin-left: 30px;
   color: #404040;
 }
-
-
+.input{
+  width: 80%;
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .login {
   font-size: 18px;
@@ -52,15 +56,16 @@ export default {
   background-color: #1890FF;
   color: white;
   border: white;
-  margin-top: 120px;
+  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 90%;
   height: 50px;
   display: block;
 }
-.privacy_agreement{
-  margin-top: 130px;
+
+.privacy_agreement {
+  margin-top: 100px;
   text-align: center;
 }
 </style>
