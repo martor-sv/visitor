@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">邀请登记</h1>
+    <h1 class="title_i">邀请登记</h1>
     <span style="height: 20px;display: block"></span>
     <div>
       <img class="img" src="../assets/smile.svg">
@@ -54,7 +54,7 @@
     </div>
 
 
-    <XButton class="submit">提交</XButton>
+    <XButton class="submit" @click.native="codeView">提交</XButton>
   </div>
 
 </template>
@@ -69,13 +69,18 @@ export default {
     XButton,
     Checker, CheckerItem
   },
-  name: "InvitationRegister"
+  name: "InvitationRegister",
+  methods: {
+    codeView: function () {
+      this.$router.push('/codeView')
+    }
+  }
 }
 </script>
 
 <style scoped>
 
-.title {
+.title_i {
   margin-left: 30px;
   margin-top: 20px;
 }
@@ -103,10 +108,11 @@ export default {
   border-radius: 25px;
 }
 
-.vux-checker-box{
+.vux-checker-box {
   display: inline-block;
   margin-left: 15px;
 }
+
 .demo1-item {
   font-size: 15px;
   text-align: center;
@@ -114,6 +120,7 @@ export default {
   color: black;
   padding: 5px 15px;
 }
+
 .demo1-item-selected {
   color: white;
   background-color: #1890FF;

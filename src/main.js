@@ -7,6 +7,7 @@ import App from './App'
 import Home from './components/BindWeChat'
 import Registration from "./components/Registration";
 import InvitationRegister from "./components/InvitationRegister";
+import CodeView from "./components/CodeView";
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,9 @@ const routes = [{
 },{
   path: '/invitationRegister',
   component: InvitationRegister
+},{
+  path: '/codeView',
+  component: CodeView
 },
 ]
 
