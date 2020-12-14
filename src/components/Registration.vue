@@ -4,7 +4,9 @@
     <span style="height: 20px;display: block"></span>
     <div>
       <img class="img" src="../assets/smile.svg">
-      <span>免冠照</span>
+      <span style="margin-left: 15px">免冠照  &nbsp</span>
+      <input type="file" style="margin-left: 15px">
+<!--      <XInput  type='file'></XInput>-->
     </div>
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
@@ -17,12 +19,12 @@
       </XInput>
     </div>
     <div class="item">
-      <img class="img" src="../assets/company.svg">
+      <img class="img" src="../assets/bussiness-man.svg">
       <XInput class="input" title="您的姓名" placeholder="请输入您的姓名" :show-clear="false">
       </XInput>
     </div>
     <div class="item">
-      <img class="img" src="../assets/company.svg">
+      <img class="img" src="../assets/mobile-phone.svg">
       <XInput class="input" title="手机号码" placeholder="请输入您的手机号码" :show-clear="false">
       </XInput>
     </div>
@@ -45,6 +47,13 @@
       <img class="img" src="../assets/company.svg">
       <span style="margin-left: 15px">来访事由</span>
 
+      <checker v-model="view_type" default-item-class="demo1-item" selected-item-class="demo1-item-selected">
+        <checker-item value="1">商务</checker-item>
+        <checker-item value="2">会议</checker-item>
+        <checker-item value="3">面试</checker-item>
+
+      </checker>
+
     </div>
 
     <XButton class="submit">提交</XButton>
@@ -53,13 +62,14 @@
 </template>
 
 <script>
-import {XButton, XInput} from 'vux'
+import {Checker, CheckerItem, XButton, XInput} from 'vux'
 import 'weui-icon/dist/filled/add-friends.css';
 
 export default {
   components: {
     XInput,
-    XButton
+    XButton,
+    Checker, CheckerItem
   },
   name: "Registration"
 }
@@ -93,6 +103,23 @@ export default {
   color: white;
   border: white;
   border-radius: 25px;
+}
+
+.vux-checker-box{
+  display: inline-block;
+ margin-left: 15px;
+}
+.demo1-item {
+  font-size: 15px;
+  text-align: center;
+  border: 1px solid #ececec;
+  color: black;
+  padding: 5px 15px;
+}
+.demo1-item-selected {
+  color: white;
+  background-color: #1890FF;
+  border: 1px solid green;
 }
 
 </style>

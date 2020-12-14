@@ -2,7 +2,7 @@
   <div>
     <h1 class="title">绑定微信</h1>
     <h5 class="sub_title">无授权码请联系管理员开通授权码</h5>
-    <XInput  class="input_code" type="text" placeholder="请输入授权码" :show-clear="false"></XInput>
+    <XInput class="input_code" type="text" placeholder="请输入授权码" :show-clear="false" v-model="input_code"></XInput>
     <Button class="login" @click="login">登陆</Button>
     <div class="privacy_agreement">
       <span>登录即表示同意</span> <a style="color: #1890FF" href="http://www.silverwind.tech:45080/privacy/app/privacy-agreement.html">《用户隐私服务协议》</a>
@@ -28,7 +28,10 @@ export default {
     }
   }, methods: {
     login: function () {
+      alert(this.input_code)
+      console.log(this.input_code)
       this.$router.push('/Registration')
+
       // alert("123")
     }
   },
