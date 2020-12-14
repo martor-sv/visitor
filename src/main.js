@@ -6,6 +6,7 @@ import VueRouter from 'vue-router'
 import App from './App'
 import Home from './components/BindWeChat'
 import Registration from "./components/Registration";
+import InvitationRegister from "./components/InvitationRegister";
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,11 @@ const routes = [{
 },{
   path: '/registration',
   component: Registration
-}]
+},{
+  path: '/invitationRegister',
+  component: InvitationRegister
+},
+]
 
 const router = new VueRouter({
   routes

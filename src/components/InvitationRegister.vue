@@ -1,26 +1,21 @@
 <template>
   <div>
-    <h1 class="title">预约登记</h1>
+    <h1 class="title">邀请登记</h1>
     <span style="height: 20px;display: block"></span>
     <div>
       <img class="img" src="../assets/smile.svg">
       <span style="margin-left: 15px">免冠照  &nbsp</span>
       <input type="file" style="margin-left: 15px">
-<!--      <XInput  type='file'></XInput>-->
+      <!--      <XInput  type='file'></XInput>-->
     </div>
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
-      <XInput class="input" title="拜访对象" placeholder="请输入拜访人名称" :show-clear="false">
+      <XInput class="input" title="邀请对象" placeholder="请输入邀请对象名称" :show-clear="false">
       </XInput>
     </div>
     <div class="item">
       <img class="img" src="../assets/company.svg">
-      <XInput class="input" title="拜访单位" placeholder="请输入拜访单位名称" :show-clear="false">
-      </XInput>
-    </div>
-    <div class="item">
-      <img class="img" src="../assets/bussiness-man.svg">
-      <XInput class="input" title="您的姓名" placeholder="请输入您的姓名" :show-clear="false">
+      <XInput class="input" title="邀请对象单位" placeholder="请输入邀请对象单位名称" :show-clear="false">
       </XInput>
     </div>
     <div class="item">
@@ -30,12 +25,7 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/company.svg">
-      <XInput class="input" title="您的单位" placeholder="请输入您的单位" :show-clear="false">
-      </XInput>
-    </div>
-    <div class="item">
-      <img class="img" src="../assets/car-number.svg">
-      <XInput class="input" title="车牌号码" placeholder="请输入您的车牌号码" :show-clear="false">
+      <XInput class="input" title="身份证号" placeholder="请输入被邀请的人身份证号" :show-clear="false">
       </XInput>
     </div>
     <div class="item">
@@ -53,10 +43,18 @@
         <checker-item value="3">面试</checker-item>
 
       </checker>
-
+    </div>
+    <div style="margin-top: 10px;margin-bottom: 10px">
+      <span style="margin-left: 30px;">邀请人 ｜ </span>
+      <span>王家卫</span>
+    </div>
+    <div style="margin-top: 10px;margin-bottom: 10px">
+      <span style="margin-left: 30px">邀请单位 ｜ </span>
+      <span>上海趋视信息科技有限公司</span>
     </div>
 
-    <XButton class="submit"  @click.native="submit">提交</XButton>
+
+    <XButton class="submit">提交</XButton>
   </div>
 
 </template>
@@ -71,14 +69,7 @@ export default {
     XButton,
     Checker, CheckerItem
   },
-  name: "Registration",
-  methods: {
-    submit: function () {
-      // alert("123")
-      this.$router.push('/invitationRegister')
-      // alert("123")
-    }
-  },
+  name: "InvitationRegister"
 }
 </script>
 
@@ -114,7 +105,7 @@ export default {
 
 .vux-checker-box{
   display: inline-block;
- margin-left: 15px;
+  margin-left: 15px;
 }
 .demo1-item {
   font-size: 15px;
