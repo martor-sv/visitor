@@ -63,7 +63,7 @@
 
 <script>
 import {Checker, CheckerItem, XButton, XInput} from 'vux'
-import 'weui-icon/dist/filled/add-friends.css';
+// import 'weui-icon/dist/filled/add-friends.css';
 
 export default {
   components: {

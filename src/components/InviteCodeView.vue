@@ -37,7 +37,7 @@
       <divider style="height: 1px;width:100%"></divider>
       <span style="margin-left: 30px">上海市闵行区紫星路588号1号楼902室</span>
 
-      <span style="padding-top:20px;margin-left: 30px">联系电话：<span style="color: #1890FF">13100000000</span></span>
+      <span style="padding-top:20px;margin-left: 30px">联系电话：<span style="color: #1890FF" @click="InviteCodeView">13100000000</span></span>
 
     </div>
   </div>
@@ -48,9 +48,14 @@
 import {Divider, XInput} from "vux";
 
 export default {
-  name: "InviteCodeView", components: {
+  name: "InviteCodeView",
+  components: {
     XInput, Divider
-  },
+  },methods:{
+    InviteCodeView:function () {
+      this.$router.push("/auditVisit")
+    }
+  }
 }
 </script>
 

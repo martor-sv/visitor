@@ -9,6 +9,7 @@ import Registration from "./components/Registration";
 import InvitationRegister from "./components/InvitationRegister";
 import CodeView from "./components/CodeView";
 import InviteCodeView from "./components/InviteCodeView";
+import AuditVisit from "./components/AuditVisit";
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,9 @@ const routes = [{
 }, {
   path: '/inviteCodeView',
   component: InviteCodeView
+}, {
+  path: '/auditVisit',
+  component: AuditVisit
 },
 ]
 
