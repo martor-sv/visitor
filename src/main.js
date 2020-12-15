@@ -8,21 +8,25 @@ import Home from './components/BindWeChat'
 import Registration from "./components/Registration";
 import InvitationRegister from "./components/InvitationRegister";
 import CodeView from "./components/CodeView";
+import InviteCodeView from "./components/InviteCodeView";
 
 Vue.use(VueRouter)
 
 const routes = [{
   path: '/',
   component: Home
-},{
+}, {
   path: '/registration',
   component: Registration
-},{
+}, {
   path: '/invitationRegister',
   component: InvitationRegister
-},{
+}, {
   path: '/codeView',
   component: CodeView
+}, {
+  path: '/inviteCodeView',
+  component: InviteCodeView
 },
 ]
 
