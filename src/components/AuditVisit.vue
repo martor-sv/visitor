@@ -8,6 +8,10 @@
 
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
+      <span>免冠照</span>
+    </div>
+    <div class="item">
+      <img class="img" src="../assets/add-account.svg">
       <cell class="cell" title="访客姓名">王家卫</cell>
     </div>
     <div class="item">
@@ -35,9 +39,9 @@
       <cell class="cell" title="被访人信息">章北海</cell>
     </div>
 
-    <div class="item">
-      <XButton style="width: 150px;">拒绝</XButton>
-      <XButton style="width: 150px">通过</XButton>
+    <div class="div_button">
+      <XButton class="reject" @click.native="reject">拒绝</XButton>
+      <XButton class="accept" @click.native="accept">通过</XButton>
     </div>
 
 
@@ -52,6 +56,12 @@ export default {
   name: "AuditVisit",
   components: {
     Cell, XButton
+  }, methods: {
+    reject: function () {
+      alert("拒绝")
+    }, accept: function () {
+      alert("通过")
+    }
   }
 }
 </script>
@@ -82,6 +92,33 @@ export default {
 
 .cell {
   width: 280px;
-  /*display: inline-flex;*/
 }
+
+.reject {
+  width: 150px;
+  text-align: center;
+  color: red;
+  border: 1px solid red;
+}
+
+.accept {
+  width: 150px;
+  text-align: center;
+  background-color: #1890FF;
+  color: white;
+}
+
+.div_button {
+  margin-top: 20px;
+  display: flex;
+  position: center;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+}
+
+.weui-btn + .weui-btn {
+  margin-top: 0;
+}
+
 </style>
