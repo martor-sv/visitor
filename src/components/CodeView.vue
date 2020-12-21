@@ -31,18 +31,17 @@
 
     </div>
   </div>
-
 </template>
 
 <script>
-import {Divider, XInput} from "vux";
+import {Divider, Scroller, XInput} from "vux";
 
 export default {
   name: "CodeView",
   components: {
-    XInput, Divider
-  },methods:{
-    nativetoinvite:function () {
+    XInput, Divider, Scroller
+  }, methods: {
+    nativetoinvite: function () {
       this.$router.push("/inviteCodeView")
     }
   }
@@ -54,7 +53,7 @@ export default {
 .box {
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
   background-size: 100% 100%;
   background-color: #1890FF;
 }

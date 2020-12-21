@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import {XInput} from 'vux'
+import { XInput} from 'vux'
+import Vue from "vue";
 
 export default {
   components: {
@@ -34,7 +35,11 @@ export default {
 
       // alert("123")
     }
-  },
+  },created() {
+    // alert("123")
+    console.log(Vue.wechat.openAddress());
+    Vue.wechat.openAddress()
+  }
 
 }
 </script>

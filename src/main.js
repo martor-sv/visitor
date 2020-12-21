@@ -10,8 +10,11 @@ import InvitationRegister from "./components/InvitationRegister";
 import CodeView from "./components/CodeView";
 import InviteCodeView from "./components/InviteCodeView";
 import AuditVisit from "./components/AuditVisit";
+import {WechatPlugin} from 'vux'
 
 Vue.use(VueRouter)
+
+Vue.use(WechatPlugin)
 
 const routes = [{
   path: '/',

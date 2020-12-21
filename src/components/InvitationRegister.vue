@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <h1 class="title_i">邀请登记</h1>
     <span style="height: 20px;display: block"></span>
     <div>
@@ -86,6 +86,7 @@ export default {
 }
 
 .item {
+
 }
 
 .img {

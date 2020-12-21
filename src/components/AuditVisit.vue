@@ -8,7 +8,7 @@
 
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
-      <span>免冠照</span>
+      <span style="margin-left: 15px;text-align: center">免冠照</span>
     </div>
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
