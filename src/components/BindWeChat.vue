@@ -5,15 +5,20 @@
     <XInput class="input_code" type="text" placeholder="请输入授权码" :show-clear="false" v-model="input_code"></XInput>
     <Button class="login" @click="login">登陆</Button>
     <div class="privacy_agreement">
-      <span>登录即表示同意</span> <a style="color: #1890FF" href="http://www.silverwind.tech:45080/privacy/app/privacy-agreement.html">《用户隐私服务协议》</a>
+      <span>登录即表示同意</span> <a style="color: #1890FF"
+                              href="http://www.silverwind.tech:45080/privacy/app/privacy-agreement.html">《用户隐私服务协议》</a>
     </div>
 
   </div>
 </template>
 
 <script>
-import { XInput} from 'vux'
-import Vue from "vue";
+
+
+import {empower} from "../utils/getWechatUserInfo";
+import HttpUtil from "../http/HttpUtil";
+
+const {XInput} = require("vux");
 
 export default {
   components: {
@@ -28,18 +33,21 @@ export default {
       msg: 'Hello World!'
     }
   }, methods: {
-    login: function () {
-      alert(this.input_code)
-      console.log(this.input_code)
-      this.$router.push('/Registration')
+    login: async function () {
+      // alert(this.input_code)
+      // console.log(this.input_code)
+      const res = await HttpUtil.get("/token","11")
 
-      // alert("123")
-    }
-  },created() {
-    // alert("123")
-    console.log(Vue.wechat.openAddress());
-    Vue.wechat.openAddress()
+
+      console.log(res)
+
+      // this.$router.push('/Registration')
+      // http.get()
+    },
+  }, created() {
+    empower();
   }
+
 
 }
 </script>

@@ -16,6 +16,10 @@ Vue.use(VueRouter)
 
 Vue.use(WechatPlugin)
 
+import * as VConsole from "vconsole";
+
+var vConsole = new VConsole()
+
 const routes = [{
   path: '/',
   component: Home
