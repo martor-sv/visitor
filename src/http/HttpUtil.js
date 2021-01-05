@@ -6,7 +6,7 @@ const service = axios.create({
   // baseURL: 'http://27.115.4.34:58700',  //研发
   // baseURL: 'http://192.168.4.16:10080',
   // baseURL: 'http://192.168.4.16:10080',
-  baseURL: "http://192.168.4.40:21183/api",
+  baseURL: "http://192.168.4.72:18700",
   timeout: 50000,
   headers: {
     // 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
@@ -34,8 +34,7 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
-    var res = response;
-    return response
+    return response;
   }, function (error) {
     return Promise.reject(error)
 

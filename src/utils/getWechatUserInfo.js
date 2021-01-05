@@ -1,3 +1,4 @@
+import wxmp from "../api/wxmp";
 
 
 function GetQueryString(name) {
@@ -10,26 +11,18 @@ function GetQueryString(name) {
 //微信用户授权
 let empower = () => {
   const code = GetQueryString("code");
+  const state = GetQueryString("state");
+
   if (code != null) {
     console.log("code="+code)
-
-
-    // if(getKey('_wechat_id')){return}
-
-    // Wxmp.oauth({code: code}).then((res) => {
-    //   if (res.statusCode == 0) {
-    //     store.dispatch('userInfoAction', res.weChatUserInfo);
-    //     window.localStorage.setItem("userInfo", JSON.stringify(res.weChatUserInfo));
-    //     getPhone(res.weChatUserInfo.openid);
-    //     setKey('_wechat_id', res.weChatUserInfo.openid);
-    //     setKey('_wechat_headimgurl', res.weChatUserInfo.headimgurl);
-    //     setKey('_wechat_nickname', res.weChatUserInfo.nickname);
-    //   }
-    // }).catch(e => {
-    //   console.log(e.message);
-    // });
-
-
+    console.log("state="+state)
+    const params =new Map()
+    params["code"]=code
+    params["originId"]=state
+    wxmp.getOpenID(params).then(r =>{
+      console.log(r)
+      }
+    )
   } else {
     //授权微信 获取code 使用code 来换取用户信息
     window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx93319a39b2c03f28&redirect_uri=http%3a%2f%2fwww.silverwind.tech%2fvisitor&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
