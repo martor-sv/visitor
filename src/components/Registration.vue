@@ -2,11 +2,12 @@
   <div>
     <h1 class="title">预约登记</h1>
     <span style="height: 20px;display: block"></span>
-    <div>
+    <div style="">
       <img class="img" src="../assets/smile.svg">
       <span style="margin-left: 15px">免冠照  &nbsp</span>
-      <input type="file" style="margin-left: 15px">
-<!--      <XInput  type='file'></XInput>-->
+      <img style="width: 48px;margin-left: 40px" src="../assets/camera-fill.svg" @click="getImg">
+      <input id="getUserImg" type="file" style="margin-left: 15px">
+      <!--      <XInput  type='file'></XInput>-->
     </div>
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
@@ -20,7 +21,7 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/bussiness-man.svg">
-      <XInput class="input" title="您的姓名" placeholder="请输入您的姓名" :show-clear="false">
+      <XInput class="input" title="您的姓名" placeholder="请输入您的姓名" :show-clear="false" v-model="name">
       </XInput>
     </div>
     <div class="item">
@@ -56,13 +57,15 @@
 
     </div>
 
-    <XButton class="submit"  @click.native="submit">提交</XButton>
+    <XButton class="submit" @click.native="submit">提交</XButton>
   </div>
 
 </template>
 
 <script>
 import {Checker, CheckerItem, XButton, XInput} from 'vux'
+
+const wxmp = require("../api/wxmp");
 // import 'weui-icon/dist/filled/add-friends.css';
 
 export default {
@@ -72,11 +75,29 @@ export default {
     Checker, CheckerItem
   },
   name: "Registration",
+  data() {
+    return {
+      name: ''
+    }
+  },
   methods: {
     submit: function () {
+      let params = new Map();
+      params["name"] = this.name
+
+      console.log(this.name)
+
+      alert(this.name)
+      // wxmp.creatVisitor(params)
+
+
       // alert("123")
-      this.$router.push('/invitationRegister')
+      // this.$router.push('/invitationRegister')
       // alert("123")
+    }, getImg: function () {
+      // alert()
+
+      document.getElementById("getUserImg").click()
     }
   },
 }
@@ -90,6 +111,10 @@ export default {
 }
 
 .item {
+}
+
+#getUserImg {
+  display: none;
 }
 
 .img {
@@ -112,10 +137,11 @@ export default {
   border-radius: 25px;
 }
 
-.vux-checker-box{
+.vux-checker-box {
   display: inline-block;
- margin-left: 15px;
+  margin-left: 15px;
 }
+
 .demo1-item {
   font-size: 15px;
   text-align: center;
@@ -123,6 +149,7 @@ export default {
   color: black;
   padding: 5px 15px;
 }
+
 .demo1-item-selected {
   color: white;
   background-color: #1890FF;

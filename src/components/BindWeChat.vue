@@ -33,16 +33,8 @@ export default {
       msg: 'Hello World!'
     }
   }, methods: {
-    login: async function () {
-      // alert(this.input_code)
-      // console.log(this.input_code)
-      const res = await HttpUtil.get("/token","11")
-
-
-      console.log(res)
-
-      // this.$router.push('/Registration')
-      // http.get()
+    login: function () {
+      this.$router.push('/Registration')
     },
   }, created() {
     empower();

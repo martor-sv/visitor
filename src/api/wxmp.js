@@ -6,8 +6,8 @@ export default {
     return HttpUtil.get('/api1/weixin/third-platform/web', params)
   },
 
-  code(params){
-    return HttpUtil.get('/jmh/weChat/sms',params)
+  creatVisitor(params){
+    return HttpUtil.get('/api1/visitor-service/user',params)
   },
 
 }
