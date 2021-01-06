@@ -5,18 +5,19 @@
     <div style="">
       <img class="img" src="../assets/smile.svg">
       <span style="margin-left: 15px">免冠照  &nbsp</span>
-      <img style="width: 48px;margin-left: 40px" src="../assets/camera-fill.svg" @click="getImg">
-      <input id="getUserImg" type="file" style="margin-left: 15px">
+      <!--      <img style="width: 48px;margin-left: 40px" src="../assets/camera-fill.svg" @click="getImg">-->
+      <input class="getUserImg" ref="getUserImg" type="file" style="margin-left: 15px" v-on:change="imgUrl" multiple
+             accept="image/png,image/jpeg,image/gif,image/jpg">
       <!--      <XInput  type='file'></XInput>-->
     </div>
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
-      <XInput class="input" title="拜访对象" placeholder="请输入拜访人名称" :show-clear="false">
+      <XInput class="input" title="拜访对象" placeholder="请输入拜访人名称" :show-clear="false" v-model="interviewName">
       </XInput>
     </div>
     <div class="item">
       <img class="img" src="../assets/company.svg">
-      <XInput class="input" title="拜访单位" placeholder="请输入拜访单位名称" :show-clear="false">
+      <XInput class="input" title="拜访单位" placeholder="请输入拜访单位名称" :show-clear="false" v-model="interviewCompanyName">
       </XInput>
     </div>
     <div class="item">
@@ -31,17 +32,23 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/company.svg">
-      <XInput class="input" title="您的单位" placeholder="请输入您的单位" :show-clear="false">
+      <XInput class="input" title="您的单位" placeholder="请输入您的单位" :show-clear="false" v-model="leaderCompanyName">
+      </XInput>
+    </div>
+    <div class="item">
+      <img class="img" src="../assets/company.svg">
+      <XInput class="input" title="您的身份证号码" placeholder="请输入您的身份证号码" :show-clear="false" v-model="idCardSn">
       </XInput>
     </div>
     <div class="item">
       <img class="img" src="../assets/car-number.svg">
-      <XInput class="input" title="车牌号码" placeholder="请输入您的车牌号码" :show-clear="false">
+      <XInput class="input" title="车牌号码" placeholder="请输入您的车牌号码" :show-clear="false" v-model="licensePlateList">
       </XInput>
     </div>
     <div class="item">
       <img class="img" src="../assets/on-time-shipment.svg">
       <XInput class="input" title="来访时间">
+
       </XInput>
     </div>
     <div class="item">
@@ -77,27 +84,76 @@ export default {
   name: "Registration",
   data() {
     return {
-      name: ''
+      name: '',
+      idCardSn: '',
+      licensePlateList: '',
+      leaderCompanyName: '',
+      interviewName: '',
+      interviewCompanyName: '',
+      view_type: '',
     }
   },
   methods: {
+    /**
+     * 提交访客申请
+     */
     submit: function () {
+      //构造访客信息
+      let leader = new Map();
+      leader["companyName"] = this.leaderCompanyName
+      leader["idCardSn"] = this.idCardSn
+      leader["name"] = this.name
+
+      //受访者公司信息
+      let company = new Map();
+      company["name"] = this.interviewCompanyName;
+
+      //构造受访者信息
+      let interviewee = new Map();
+      interviewee["name"] = this.interviewName
+      interviewee["company"] = company
+
       let params = new Map();
-      params["name"] = this.name
+      //车牌号
+      params["licensePlateList"] = this.licensePlateList
+      //领队信息
+      params["leader"] = leader;
+      //受访者信息
+      params["interviewee"] = interviewee;
 
-      console.log(this.name)
+      switch (this.view_type.toString()) {
+        case "1":{
+          params["memo"] = "商务";
+          break;
+        }
+        case "2": {
+          params["memo"] = "拜访";
+          break;
+        }
+        case "3": {
+          params["memo"] = "面试";
+          break;
+        }
+      }
+      console.log(params)
 
-      alert(this.name)
       // wxmp.creatVisitor(params)
 
-
-      // alert("123")
       // this.$router.push('/invitationRegister')
-      // alert("123")
+
     }, getImg: function () {
       // alert()
+      this.$refs.getUserImg.click()
+      // document.getElementById("getUserImg").click()
+      // document.getElementById("getUserImg").style.display="inline";
+    }, imgUrl: function () {
 
-      document.getElementById("getUserImg").click()
+      console.log("11")
+      console.log(this.$refs.getUserImg.files[0].name)
+      console.log(this.$refs.getUserImg.files)
+
+      // console.log(document.getElementById("getUserImg").file.name)
+      // console.log("url")
     }
   },
 }
@@ -113,9 +169,9 @@ export default {
 .item {
 }
 
-#getUserImg {
-  display: none;
-}
+/*#getUserImg {*/
+/*  display: none;*/
+/*}*/
 
 .img {
   margin-left: 30px;
