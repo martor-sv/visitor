@@ -11,6 +11,9 @@ import CodeView from "./components/CodeView";
 import InviteCodeView from "./components/InviteCodeView";
 import AuditVisit from "./components/AuditVisit";
 import {WechatPlugin} from 'vux'
+import { DatetimePlugin } from 'vux'
+
+Vue.use(DatetimePlugin)
 
 Vue.use(VueRouter)
 

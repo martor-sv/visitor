@@ -10,12 +10,12 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
-      <XInput class="input" title="邀请对象" placeholder="请输入邀请对象名称" :show-clear="false">
+      <XInput class="input" title="邀请对象" placeholder="请输入邀请对象名称" :show-clear="false" v-model="name">
       </XInput>
     </div>
     <div class="item">
       <img class="img" src="../assets/company.svg">
-      <XInput class="input" title="邀请对象单位" placeholder="请输入邀请对象单位名称" :show-clear="false">
+      <XInput class="input" title="邀请对象单位" placeholder="请输入邀请对象单位名称" :show-clear="false" v-model="leaderCompanyName">
       </XInput>
     </div>
     <div class="item">
@@ -70,9 +70,60 @@ export default {
     Checker, CheckerItem
   },
   name: "InvitationRegister",
+  data() {
+    return {
+      name: '',
+      leaderCompanyName: '',
+      view_type: '',
+
+
+    }
+  },
   methods: {
     codeView: function () {
-      this.$router.push('/codeView')
+
+      //构造访客信息
+      let leader = new Map();
+      leader["companyName"] = this.leaderCompanyName
+      leader["idCardSn"] = this.idCardSn
+      leader["name"] = this.name
+
+      // //受访者公司信息
+      // let company = new Map();
+      // company["name"] = this.interviewCompanyName;
+      //
+      // //构造受访者信息
+      // let interviewee = new Map();
+      // interviewee["name"] = this.interviewName
+      // interviewee["company"] = company
+
+      let params = new Map();
+      //车牌号
+      params["licensePlateList"] = this.licensePlateList
+      //领队信息
+      params["leader"] = leader;
+      //受访者信息
+      // params["interviewee"] = interviewee;
+
+      switch (this.view_type.toString()) {
+        case "1": {
+          params["memo"] = "商务";
+          break;
+        }
+        case "2": {
+          params["memo"] = "拜访";
+          break;
+        }
+        case "3": {
+          params["memo"] = "面试";
+          break;
+        }
+      }
+      console.log(params);
+
+
+
+      // this.$router.push('/codeView')
     }
   }
 }

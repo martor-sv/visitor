@@ -27,7 +27,7 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/mobile-phone.svg">
-      <XInput class="input" title="手机号码" placeholder="请输入您的手机号码" :show-clear="false">
+      <XInput class="input" type="tel" title="手机号码" placeholder="请输入您的手机号码" :show-clear="false">
       </XInput>
     </div>
     <div class="item">
@@ -37,7 +37,7 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/company.svg">
-      <XInput class="input" title="您的身份证号码" placeholder="请输入您的身份证号码" :show-clear="false" v-model="idCardSn">
+      <XInput class="input" title="身份证号码" placeholder="请输入身份证号码" :show-clear="false" v-model="idCardSn">
       </XInput>
     </div>
     <div class="item">
@@ -47,9 +47,10 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/on-time-shipment.svg">
-      <XInput class="input" title="来访时间">
-
+<!--      <span style="margin-left: 15px">来访时间  &nbsp</span>-->
+      <XInput class="input" ref="visitTime" title="来访时间" disabled placeholder="2020-01-01 00:00" @click.native="showPlugin" v-model="visitTime">
       </XInput>
+<!--      <span ref="visitTime" @click.native="showPlugin">选择时间</span>-->
     </div>
     <div class="item">
       <img class="img" src="../assets/help.svg">
@@ -70,7 +71,7 @@
 </template>
 
 <script>
-import {Checker, CheckerItem, XButton, XInput} from 'vux'
+import {Checker, CheckerItem, Datetime, XButton, XInput} from 'vux'
 
 const wxmp = require("../api/wxmp");
 // import 'weui-icon/dist/filled/add-friends.css';
@@ -79,7 +80,9 @@ export default {
   components: {
     XInput,
     XButton,
-    Checker, CheckerItem
+    Checker,
+    CheckerItem,
+    Datetime
   },
   name: "Registration",
   data() {
@@ -91,6 +94,8 @@ export default {
       interviewName: '',
       interviewCompanyName: '',
       view_type: '',
+      hourListValue:'',
+      visitTime:'',
     }
   },
   methods: {
@@ -120,9 +125,11 @@ export default {
       params["leader"] = leader;
       //受访者信息
       params["interviewee"] = interviewee;
+      //拜访时间
+      params["beginTime"] = this.visitTime;
 
       switch (this.view_type.toString()) {
-        case "1":{
+        case "1": {
           params["memo"] = "商务";
           break;
         }
@@ -139,23 +146,45 @@ export default {
 
       // wxmp.creatVisitor(params)
 
-      // this.$router.push('/invitationRegister')
+      this.$router.push('/invitationRegister')
 
     }, getImg: function () {
-      // alert()
       this.$refs.getUserImg.click()
       // document.getElementById("getUserImg").click()
       // document.getElementById("getUserImg").style.display="inline";
     }, imgUrl: function () {
-
       console.log("11")
       console.log(this.$refs.getUserImg.files[0].name)
       console.log(this.$refs.getUserImg.files)
+      this.$refs.visitTime.value = "123";
+      console.log(this.$refs.visitTime)
 
-      // console.log(document.getElementById("getUserImg").file.name)
-      // console.log("url")
+    },
+    showPlugin() {
+      const that = this
+      this.$vux.datetime.show({
+        cancelText: '取消',
+        confirmText: '确定',
+        format: 'YYYY-MM-DD HH:mm',
+        value: '2021-01-01 00:00',
+        onConfirm(val) {
+          // this.$set(this.visitTime,val)
+          that.visitTime = val
+          that.$refs.visitTime.value=val;
+          console.log(that.visitTime)
+          console.log('plugin confirm', val)
+        },
+        onShow() {
+          console.log('plugin show')
+        },
+        onHide() {
+          console.log('plugin hide')
+        }
+      })
     }
-  },
+
+
+  }
 }
 </script>
 
