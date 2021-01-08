@@ -30,7 +30,7 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/on-time-shipment.svg">
-      <XInput class="input" title="来访时间">
+      <XInput class="input" ref="visitTime" title="来访时间" disabled placeholder="2020-01-01 00:00" @click.native="showPlugin" v-model="visitTime">
       </XInput>
     </div>
     <div class="item">
@@ -75,6 +75,7 @@ export default {
       name: '',
       leaderCompanyName: '',
       view_type: '',
+      visitTime: '',
 
 
     }
@@ -89,13 +90,15 @@ export default {
       leader["name"] = this.name
 
       // //受访者公司信息
-      // let company = new Map();
-      // company["name"] = this.interviewCompanyName;
+      let company = new Map();
+      company["name"] = localStorage.companyName;
       //
       // //构造受访者信息
-      // let interviewee = new Map();
-      // interviewee["name"] = this.interviewName
-      // interviewee["company"] = company
+      let inviter = new Map();
+      inviter["name"] = localStorage.userName
+      inviter["company"] = company
+
+      localStorage.token="123321"
 
       let params = new Map();
       //车牌号
@@ -103,7 +106,11 @@ export default {
       //领队信息
       params["leader"] = leader;
       //受访者信息
-      // params["interviewee"] = interviewee;
+
+      params["inviter"] = inviter;
+
+      //拜访时间
+      params["beginTime"] = this.visitTime;
 
       switch (this.view_type.toString()) {
         case "1": {
@@ -121,9 +128,29 @@ export default {
       }
       console.log(params);
 
-
-
-      // this.$router.push('/codeView')
+      this.$router.push('/codeView')
+    },
+    showPlugin() {
+      const that = this
+      this.$vux.datetime.show({
+        cancelText: '取消',
+        confirmText: '确定',
+        format: 'YYYY-MM-DD HH:mm',
+        value: '2021-01-01 00:00',
+        onConfirm(val) {
+          // this.$set(this.visitTime,val)
+          that.visitTime = val
+          that.$refs.visitTime.value=val;
+          console.log(that.visitTime)
+          console.log('plugin confirm', val)
+        },
+        onShow() {
+          console.log('plugin show')
+        },
+        onHide() {
+          console.log('plugin hide')
+        }
+      })
     }
   }
 }
