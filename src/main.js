@@ -24,6 +24,7 @@ import * as VConsole from "vconsole";
 var vConsole = new VConsole()
 
 const routes = [{
+  // path: '/visitor',
   path: '/',
   component: Home
 }, {

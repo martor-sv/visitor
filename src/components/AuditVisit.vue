@@ -7,9 +7,13 @@
     </div>
 
     <div class="item">
-      <img class="img" src="../assets/add-account.svg">
-      <span style="margin-left: 15px;text-align: center">免冠照</span>
+      <img class="headimg" src="../assets/add-account.svg">
+      <cell class="cell" title="免冠照">
+        <img class="img" src="http://192.168.2.8/visit-APP/uploads4/images/5810/58104951/v2_qkzzwz.png">
+      </cell>
+<!--      <span style="margin-left: 15px;text-align: center">免冠照</span>-->
     </div>
+
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
       <cell class="cell" title="访客姓名">王家卫</cell>
@@ -86,6 +90,14 @@ export default {
   display: inline-block;
   margin-left: 30px;
   transform: translateY(20%);
+  width: 30px;
+  height: 30px;
+}
+
+.headimg{
+  display: inline-block;
+  margin-left: 30px;
+  transform: translateY(50%);
   width: 30px;
   height: 30px;
 }

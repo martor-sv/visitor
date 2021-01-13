@@ -76,57 +76,91 @@ export default {
       leaderCompanyName: '',
       view_type: '',
       visitTime: '',
-
-
     }
   },
   methods: {
     codeView: function () {
 
-      //构造访客信息
-      let leader = new Map();
-      leader["companyName"] = this.leaderCompanyName
-      leader["idCardSn"] = this.idCardSn
-      leader["name"] = this.name
-
-      // //受访者公司信息
-      let company = new Map();
-      company["name"] = localStorage.companyName;
-      //
-      // //构造受访者信息
-      let inviter = new Map();
-      inviter["name"] = localStorage.userName
-      inviter["company"] = company
-
-      localStorage.token="123321"
-
-      let params = new Map();
-      //车牌号
-      params["licensePlateList"] = this.licensePlateList
-      //领队信息
-      params["leader"] = leader;
-      //受访者信息
-
-      params["inviter"] = inviter;
-
-      //拜访时间
-      params["beginTime"] = this.visitTime;
-
+      let memo;
       switch (this.view_type.toString()) {
         case "1": {
-          params["memo"] = "商务";
+          memo = "商务";
           break;
         }
         case "2": {
-          params["memo"] = "拜访";
+          memo = "拜访";
           break;
         }
         case "3": {
-          params["memo"] = "面试";
+          memo = "面试";
           break;
         }
       }
-      console.log(params);
+
+      let jsonParams = {
+        "licensePlateList": this.licensePlateList,
+        "leader": {
+          "companyName": this.leaderCompanyName,
+          "idCardSn": this.idCardSn,
+          "name": this.name,
+        },
+        "inviter": {
+          "name": localStorage.userName,
+          "company": {
+            "name": localStorage.companyName
+          }
+        },
+        "beginTime": this.visitTime,
+        "memo":memo
+      }
+
+
+      // //构造访客信息
+      // let leader = new Map();
+      // leader["companyName"] = this.leaderCompanyName
+      // leader["idCardSn"] = this.idCardSn
+      // leader["name"] = this.name
+      //
+      // // //受访者公司信息
+      // let company = new Map();
+      // company["name"] = localStorage.companyName;
+      // //
+      // // //构造受访者信息
+      // let inviter = new Map();
+      // inviter["name"] = localStorage.userName
+      // inviter["company"] = company
+      //
+      // localStorage.token="123321"
+      //
+      // let params = new Map();
+      // //车牌号
+      // params["licensePlateList"] = this.licensePlateList
+      // //领队信息
+      // params["leader"] = leader;
+      // //受访者信息
+      //
+      // params["inviter"] = inviter;
+      //
+      // //拜访时间
+      // params["beginTime"] = this.visitTime;
+      //
+      // switch (this.view_type.toString()) {
+      //   case "1": {
+      //     params["memo"] = "商务";
+      //     break;
+      //   }
+      //   case "2": {
+      //     params["memo"] = "拜访";
+      //     break;
+      //   }
+      //   case "3": {
+      //     params["memo"] = "面试";
+      //     break;
+      //   }
+      // }
+      // console.log(params);
+
+      console.log(jsonParams)
 
       this.$router.push('/codeView')
     },

@@ -5,10 +5,8 @@
     <div style="">
       <img class="img" src="../assets/smile.svg">
       <span style="margin-left: 15px">免冠照  &nbsp</span>
-      <!--      <img style="width: 48px;margin-left: 40px" src="../assets/camera-fill.svg" @click="getImg">-->
       <input class="getUserImg" ref="getUserImg" type="file" style="margin-left: 15px" v-on:change="imgUrl" multiple
              accept="image/png,image/jpeg,image/gif,image/jpg">
-      <!--      <XInput  type='file'></XInput>-->
     </div>
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
@@ -47,10 +45,11 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/on-time-shipment.svg">
-<!--      <span style="margin-left: 15px">来访时间  &nbsp</span>-->
-      <XInput class="input" ref="visitTime" title="来访时间" disabled placeholder="2020-01-01 00:00" @click.native="showPlugin" v-model="visitTime">
+      <!--      <span style="margin-left: 15px">来访时间  &nbsp</span>-->
+      <XInput class="input" ref="visitTime" title="来访时间" disabled placeholder="2020-01-01 00:00"
+              @click.native="showPlugin" v-model="visitTime">
       </XInput>
-<!--      <span ref="visitTime" @click.native="showPlugin">选择时间</span>-->
+      <!--      <span ref="visitTime" @click.native="showPlugin">选择时间</span>-->
     </div>
     <div class="item">
       <img class="img" src="../assets/help.svg">
@@ -60,7 +59,6 @@
         <checker-item value="1">商务</checker-item>
         <checker-item value="2">会议</checker-item>
         <checker-item value="3">面试</checker-item>
-
       </checker>
 
     </div>
@@ -72,6 +70,7 @@
 
 <script>
 import {Checker, CheckerItem, Datetime, XButton, XInput} from 'vux'
+import {JsonUtils} from "../utils/JsonUtils";
 
 const wxmp = require("../api/wxmp");
 // import 'weui-icon/dist/filled/add-friends.css';
@@ -94,8 +93,8 @@ export default {
       interviewName: '',
       interviewCompanyName: '',
       view_type: '',
-      hourListValue:'',
-      visitTime:'',
+      hourListValue: '',
+      visitTime: '',
     }
   },
   methods: {
@@ -103,46 +102,87 @@ export default {
      * 提交访客申请
      */
     submit: function () {
-      //构造访客信息
-      let leader = new Map();
-      leader["companyName"] = this.leaderCompanyName
-      leader["idCardSn"] = this.idCardSn
-      leader["name"] = this.name
 
-      //受访者公司信息
-      let company = new Map();
-      company["name"] = this.interviewCompanyName;
 
-      //构造受访者信息
-      let interviewee = new Map();
-      interviewee["name"] = this.interviewName
-      interviewee["company"] = company
-
-      let params = new Map();
-      //车牌号
-      params["licensePlateList"] = this.licensePlateList
-      //领队信息
-      params["leader"] = leader;
-      //受访者信息
-      params["interviewee"] = interviewee;
-      //拜访时间
-      params["beginTime"] = this.visitTime;
-
+      let memo;
       switch (this.view_type.toString()) {
         case "1": {
-          params["memo"] = "商务";
+          memo = "商务";
           break;
         }
         case "2": {
-          params["memo"] = "拜访";
+          memo = "拜访";
           break;
         }
         case "3": {
-          params["memo"] = "面试";
+          memo = "面试";
           break;
         }
       }
-      console.log(params)
+
+      let jsonParams = {
+        "licensePlateList": this.licensePlateList,
+        "leader": {
+          "companyName": this.leaderCompanyName,
+          "idCardSn": this.idCardSn,
+          "name": this.name,
+        },
+        "interviewee": {
+          "name": this.interviewName,
+          "company": {
+            "name": this.interviewCompanyName
+          }
+        },
+        "beginTime": this.visitTime,
+        "memo":memo
+      }
+
+
+      // //构造访客信息
+      // let leader = new Map();
+      // leader["companyName"] = this.leaderCompanyName
+      // leader["idCardSn"] = this.idCardSn
+      // leader["name"] = this.name
+      //
+      // //受访者公司信息
+      // let company = new Map();
+      // company["name"] = this.interviewCompanyName;
+      //
+      // //构造受访者信息
+      // let interviewee = new Map();
+      // interviewee["name"] = this.interviewName
+      // interviewee["company"] = company
+      //
+      // let params = new Map();
+      // //车牌号
+      // params["licensePlateList"] = this.licensePlateList
+      // //领队信息
+      // params["leader"] = leader;
+      // //受访者信息
+      // params["interviewee"] = interviewee;
+      // //拜访时间
+      // params["beginTime"] = this.visitTime;
+      //
+      // switch (this.view_type.toString()) {
+      //   case "1": {
+      //     params["memo"] = "商务";
+      //     break;
+      //   }
+      //   case "2": {
+      //     params["memo"] = "拜访";
+      //     break;
+      //   }
+      //   case "3": {
+      //     params["memo"] = "面试";
+      //     break;
+      //   }
+      // }
+      // console.log(params)
+      console.log(jsonParams)
+
+
+      // console.log(JSON.stringify([...params]));
+      // console.log(JsonUtils.mapToJson(params))
 
       // wxmp.creatVisitor(params)
 
@@ -170,7 +210,7 @@ export default {
         onConfirm(val) {
           // this.$set(this.visitTime,val)
           that.visitTime = val
-          that.$refs.visitTime.value=val;
+          that.$refs.visitTime.value = val;
           console.log(that.visitTime)
           console.log('plugin confirm', val)
         },
