@@ -10,6 +10,7 @@ import InvitationRegister from "./components/InvitationRegister";
 import CodeView from "./components/CodeView";
 import InviteCodeView from "./components/InviteCodeView";
 import AuditVisit from "./components/AuditVisit";
+import Approved from "./components/Approved";
 import {WechatPlugin} from 'vux'
 import { DatetimePlugin } from 'vux'
 
@@ -42,6 +43,9 @@ const routes = [{
 }, {
   path: '/auditVisit',
   component: AuditVisit
+}, {
+  path: '/Approved',
+  component: Approved
 },
 ]
 

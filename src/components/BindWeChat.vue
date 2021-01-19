@@ -16,7 +16,6 @@
 
 
 import {empower} from "../utils/getWechatUserInfo";
-import HttpUtil from "../http/HttpUtil";
 
 const {XInput} = require("vux");
 
