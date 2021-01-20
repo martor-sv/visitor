@@ -12,27 +12,27 @@
     </div>
 
     <div class="item">
-      <img class="img" src="../assets/add-account.svg">
+      <img class="img" src="../assets/mobile-phone.svg">
       <cell class="cell" title="访客手机号">13512311233</cell>
     </div>
 
     <div class="item">
-      <img class="img" src="../assets/add-account.svg">
+      <img class="img" src="../assets/company.svg">
       <cell class="cell" title="访客单位">上海趋视信息科技有限公司</cell>
     </div>
 
     <div class="item">
-      <img class="img" src="../assets/add-account.svg">
+      <img class="img" src="../assets/on-time-shipment.svg">
       <cell class="cell" title="来访时间">2020-01-01 9：30</cell>
     </div>
 
     <div class="item">
-      <img class="img" src="../assets/add-account.svg">
+      <img class="img" src="../assets/help.svg">
       <cell class="cell" title="访问事由">面试</cell>
     </div>
 
     <div class="item">
-      <img class="img" src="../assets/add-account.svg">
+      <img class="img" src="../assets/coupons-fill.svg">
       <cell class="cell" title="身份证号">340881111111111111111</cell>
     </div>
 

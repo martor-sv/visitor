@@ -15,7 +15,7 @@
     </div>
 
     <div class="item">
-      <img class="img" src="../assets/add-account.svg">
+      <img class="img" src="../assets/add-account.svg" >
       <cell class="cell" title="访客姓名">王家卫</cell>
     </div>
     <div class="item">
