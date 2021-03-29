@@ -9,8 +9,10 @@
 
       <span style="display: block;text-align: center;color:#A29C9C;margin-top: 10px">访客凭证</span>
 
-      <img class="img_code"
-           src="https://infinityicon.infinitynewtab.com/user-share-icon/3a9abce9ff5c6d6f6fa07c3eb60a2805.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim">
+      <!--      <qrcode-stream class="img_code" @decode="onDecode" @init=""></qrcode-stream>-->
+      <div class="img_code" ref="qrCodeUrl"></div>
+      <!--      <img -->
+      <!--           src="https://infinityicon.infinitynewtab.com/user-share-icon/3a9abce9ff5c6d6f6fa07c3eb60a2805.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim">-->
 
     </div>
     <div class="view_info">
@@ -30,20 +32,34 @@
       <span style="padding-top:20px;margin-left: 30px">联系电话：<span style="color: #1890FF" @click="nativetoinvite">13100000000</span></span>
 
     </div>
+
   </div>
 </template>
 
 <script>
 import {Divider, Scroller, XInput} from "vux";
+import QRCode from 'qrcodejs2'
 
 export default {
   name: "CodeView",
   components: {
-    XInput, Divider, Scroller
-  }, methods: {
+    XInput, Divider, Scroller,
+  },
+  methods: {
     nativetoinvite: function () {
       this.$router.push("/inviteCodeView")
+    }, creatQrCode() {
+      var img_code = new QRCode(this.$refs.qrCodeUrl, {
+        text: 'https://www.baidu.com',
+        width: 240,
+        height: 240,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      })
     }
+  }, mounted() {
+    this.creatQrCode();
   }
 }
 </script>
