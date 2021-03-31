@@ -9,10 +9,7 @@
 
       <span style="display: block;text-align: center;color:#A29C9C;margin-top: 10px">访客凭证</span>
 
-      <!--      <qrcode-stream class="img_code" @decode="onDecode" @init=""></qrcode-stream>-->
       <div class="img_code" ref="qrCodeUrl"></div>
-      <!--      <img -->
-      <!--           src="https://infinityicon.infinitynewtab.com/user-share-icon/3a9abce9ff5c6d6f6fa07c3eb60a2805.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim">-->
 
     </div>
     <div class="view_info">
@@ -28,7 +25,6 @@
       </div>
       <divider style="height: 1px;width:100%"></divider>
       <span style="margin-left: 30px">上海市闵行区紫星路588号1号楼902室</span>
-
       <span style="padding-top:20px;margin-left: 30px">联系电话：<span style="color: #1890FF" @click="nativetoinvite">13100000000</span></span>
 
     </div>

@@ -5,7 +5,7 @@
     <div>
       <img class="img" src="../assets/smile.svg">
       <span style="margin-left: 15px">免冠照  &nbsp</span>
-      <input type="file" style="margin-left: 15px">
+      <input class="getUserImg" type="file" style="margin-left: 15px">
       <!--      <XInput  type='file'></XInput>-->
     </div>
     <div class="item">
@@ -15,7 +15,7 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/company.svg">
-      <XInput class="input" title="邀请对象单位" placeholder="请输入邀请对象单位名称" :show-clear="false" v-model="leaderCompanyName">
+      <XInput style="width: 70%" class="input" title="邀请对象单位" placeholder="请输入邀请对象单位名称" :show-clear="false" v-model="leaderCompanyName">
       </XInput>
     </div>
     <div class="item">
@@ -199,6 +199,10 @@ export default {
 
 .item {
 
+}
+
+.getUserImg{
+  width: 50%;
 }
 
 .img {

@@ -5,6 +5,7 @@
     <div style="">
       <img class="img" src="../assets/smile.svg">
       <span style="margin-left: 15px">免冠照  &nbsp</span>
+<!--      <XInput class="input" title="免冠照" placeholder="请输入拜访人名称" :show-clear="false" v-model="interviewName">  </XInput>-->
       <input class="getUserImg" ref="getUserImg" type="file" style="margin-left: 15px" v-on:change="imgUrl" multiple
              accept="image/png,image/jpeg,image/gif,image/jpg">
     </div>
@@ -35,7 +36,7 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/company.svg">
-      <XInput class="input" title="身份证号码" placeholder="请输入身份证号码" :show-clear="false" v-model="idCardSn">
+      <XInput class="input" title="身份证号" placeholder="请输入身份证号码" :show-clear="false" v-model="idCardSn">
       </XInput>
     </div>
     <div class="item">
@@ -180,7 +181,6 @@ export default {
       // console.log(params)
       console.log(jsonParams)
 
-
       // console.log(JSON.stringify([...params]));
       // console.log(JsonUtils.mapToJson(params))
 
@@ -238,9 +238,9 @@ export default {
 .item {
 }
 
-/*#getUserImg {*/
-/*  display: none;*/
-/*}*/
+.getUserImg {
+  width: 50%;
+}
 
 .img {
   margin-left: 30px;
