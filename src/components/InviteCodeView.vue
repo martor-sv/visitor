@@ -28,6 +28,7 @@
         <XInput class="input" title="访问时间" value="2020-11-19 10：30" readonly="readonly" :show-clear="false">
         </XInput>
       </div>
+
       <div class="item">
         <img class="img" src="../assets/on-time-shipment.svg">
         <XInput class="input" title="单位" value="上海趋视信息科技有限公司" readonly="readonly" :show-clear="false">
