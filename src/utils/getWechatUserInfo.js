@@ -18,14 +18,14 @@ let empower = () => {
     console.log("state="+state)
     const params =new Map()
     params["code"]=code
-    params["originId"]=state
+    params["originId"]="gh_33d8ba02daec"
     wxmp.getOpenID(params).then(r =>{
       console.log(r)
-      }
+    }
     )
   } else {
     //授权微信 获取code 使用code 来换取用户信息
-    window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx93319a39b2c03f28&redirect_uri=http%3a%2f%2fwww.silverwind.tech%2fvisitor&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+    window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx93319a39b2c03f28&redirect_uri=http%3a%2f%2fwww.silverwind.tech%2fvisitor&response_type=code&scope=snsapi_userinfo&state=gh_33d8ba02daec#wechat_redirect";
   }
 }
 

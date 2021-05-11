@@ -2,10 +2,10 @@
   <div>
     <h1 class="title">预约登记</h1>
     <span style="height: 20px;display: block"></span>
-    <div style="">
+    <div>
       <img class="img" src="../assets/smile.svg">
       <span style="margin-left: 15px">免冠照  &nbsp</span>
-<!--      <XInput class="input" title="免冠照" placeholder="请输入拜访人名称" :show-clear="false" v-model="interviewName">  </XInput>-->
+      <!--      <XInput class="input" title="免冠 照" placeholder="请输入拜访人名称" :show-clear="false" v-model="interviewName">  </XInput>-->
       <input class="getUserImg" ref="getUserImg" type="file" style="margin-left: 15px" v-on:change="imgUrl" multiple
              accept="image/png,image/jpeg,image/gif,image/jpg">
     </div>
@@ -16,8 +16,9 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/company.svg">
-      <XInput class="input" title="拜访单位" placeholder="请输入拜访单位名称" :show-clear="false" v-model="interviewCompanyName">
-      </XInput>
+      <popup-picker id="companyName" title="拜访单位" :data="[listCompany]" v-model="value1" @on-show="onShow" @on-hide="onHide"
+                    @on-change="onChange" placeholder="请选择拜访单位"></popup-picker>
+      <!--      <popup-picker :title="title1" :data="list1" v-model="value1" @on-show="onShow" @on-hide="onHide" @on-change="onChange" :placeholder="$t('please select')"></popup-picker>-->
     </div>
     <div class="item">
       <img class="img" src="../assets/bussiness-man.svg">
@@ -26,7 +27,7 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/mobile-phone.svg">
-      <XInput class="input" type="tel" title="手机号码" placeholder="请输入您的手机号码" :show-clear="false">
+      <XInput class="input" type="tel" title="手机号码" placeholder="请输入您的手机号码" :show-clear="false" v-model="phoneNumber">
       </XInput>
     </div>
     <div class="item">
@@ -70,8 +71,9 @@
 </template>
 
 <script>
-import {Checker, CheckerItem, Datetime, XButton, XInput} from 'vux'
-import {JsonUtils} from "../utils/JsonUtils";
+import {Checker, CheckerItem, Datetime, PopupPicker, XButton, XInput} from 'vux'
+import HttpUtil from "../http/HttpUtil";
+import {Common} from "../api/common";
 
 const wxmp = require("../api/wxmp");
 // import 'weui-icon/dist/filled/add-friends.css';
@@ -82,7 +84,8 @@ export default {
     XButton,
     Checker,
     CheckerItem,
-    Datetime
+    Datetime,
+    PopupPicker
   },
   name: "Registration",
   data() {
@@ -95,7 +98,10 @@ export default {
       interviewCompanyName: '',
       view_type: '',
       hourListValue: '',
-      visitTime: '',
+      visitTime: '2020-01-01 00:00',
+      phoneNumber: '',
+      listCompany: [],
+      value1: ["请选择拜访单位"],
     }
   },
   methods: {
@@ -103,8 +109,6 @@ export default {
      * 提交访客申请
      */
     submit: function () {
-
-
       let memo;
       switch (this.view_type.toString()) {
         case "1": {
@@ -122,82 +126,56 @@ export default {
       }
 
       let jsonParams = {
-        "licensePlateList": this.licensePlateList,
-        "leader": {
-          "companyName": this.leaderCompanyName,
-          "idCardSn": this.idCardSn,
-          "name": this.name,
+        "memo": memo,
+        "property": {
+          "id": "15",
+          "name": "访客物业公司",
+          "type": "visitor-property"
+        },
+        "proprietor": {
+          "id": this.value1[0],
+          "name": this.value1[0],
+          "type": "visitor-proprietor"
         },
         "interviewee": {
-          "name": this.interviewName,
-          "company": {
-            "name": this.interviewCompanyName
-          }
+          "name": "张",
+          "mobile": "19946068451"
+        },
+        "leader": {
+          "visitorId": "1000086",
+          "companyName": this.leaderCompanyName,
+          "name": this.name,
+          "mobile": this.phoneNumber,
+          "idCardSn": this.idCardSn,
+          "photoKey": "dev//visitor-service/2021-04-22/15/10065/2021-04-22/ddIFHM9Z4EakREwX"
         },
         "beginTime": this.visitTime,
-        "memo":memo
+        "endTime": "2028-5-11 18:00"
       }
 
 
-      // //构造访客信息
-      // let leader = new Map();
-      // leader["companyName"] = this.leaderCompanyName
-      // leader["idCardSn"] = this.idCardSn
-      // leader["name"] = this.name
-      //
-      // //受访者公司信息
-      // let company = new Map();
-      // company["name"] = this.interviewCompanyName;
-      //
-      // //构造受访者信息
-      // let interviewee = new Map();
-      // interviewee["name"] = this.interviewName
-      // interviewee["company"] = company
-      //
-      // let params = new Map();
-      // //车牌号
-      // params["licensePlateList"] = this.licensePlateList
-      // //领队信息
-      // params["leader"] = leader;
-      // //受访者信息
-      // params["interviewee"] = interviewee;
-      // //拜访时间
-      // params["beginTime"] = this.visitTime;
-      //
-      // switch (this.view_type.toString()) {
-      //   case "1": {
-      //     params["memo"] = "商务";
-      //     break;
-      //   }
-      //   case "2": {
-      //     params["memo"] = "拜访";
-      //     break;
-      //   }
-      //   case "3": {
-      //     params["memo"] = "面试";
-      //     break;
-      //   }
-      // }
-      // console.log(params)
       console.log(jsonParams)
 
-      // console.log(JSON.stringify([...params]));
-      // console.log(JsonUtils.mapToJson(params))
+      HttpUtil.post_json(Common.job_form, jsonParams).then(
+        r => {
+          if (r['code'] === 200000000) {
+            console.log("创建成功")
+          }
+        }
+      )
 
-      // wxmp.creatVisitor(params)
-
-      this.$router.push('/invitationRegister')
+      // this.$router.push('/invitationRegister')
 
     }, getImg: function () {
       this.$refs.getUserImg.click()
       // document.getElementById("getUserImg").click()
       // document.getElementById("getUserImg").style.display="inline";
     }, imgUrl: function () {
-      console.log("11")
-      console.log(this.$refs.getUserImg.files[0].name)
-      console.log(this.$refs.getUserImg.files)
-      this.$refs.visitTime.value = "123";
-      console.log(this.$refs.visitTime)
+      // console.log("11")
+      // console.log(this.$refs.getUserImg.files[0].name)
+      // console.log(this.$refs.getUserImg.files)
+      // this.$refs.visitTime.value = "123";
+      // console.log(this.$refs.visitTime)
 
     },
     showPlugin() {
@@ -221,9 +199,32 @@ export default {
           console.log('plugin hide')
         }
       })
+    },
+    onChange(val) {
+      console.log('val change', val)
+      console.log(this.value1)
+    },
+    onShow() {
+      console.log('on show')
+    },
+    onHide(type) {
+      console.log('on hide', type)
     }
 
+  }, created() {
+    HttpUtil.get(Common.proprietor_url, {}).then(r => {
+        r['proprietorList'].forEach(e=>{
+          this.listCompany.push({
+            "name":e['name'],
+            "value":e['id'],
+          })
+          console.log(e)
+        })
 
+      console.log(this.listCompany.length)
+      console.log(this.listCompany)
+
+    })
   }
 }
 </script>

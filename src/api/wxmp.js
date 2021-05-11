@@ -8,9 +8,14 @@ export default {
     return HttpUtil.get(Common.web_url, params)
   },
 
-  //
-  creatVisitor(params) {
-    return HttpUtil.get(Common.user_url, params)
+  //创建访客
+  creatVisitor:function(params) {
+    return  HttpUtil.post_json(Common.job_form, params)
   },
+
+    getCompany :function(params) {
+    return HttpUtil.get(Common.proprietor_url,params)
+  }
+
 
 }
