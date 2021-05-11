@@ -16,9 +16,9 @@
     </div>
     <div class="item">
       <img class="img" src="../assets/company.svg">
-      <popup-picker id="companyName" title="拜访单位" :data="[listCompany]" v-model="value1" @on-show="onShow" @on-hide="onHide"
+      <popup-picker id="companyName" title="拜访单位" :data="[listCompany]" v-model="selectCompanyName" @on-show="onShow"
+                    @on-hide="onHide"
                     @on-change="onChange" placeholder="请选择拜访单位"></popup-picker>
-      <!--      <popup-picker :title="title1" :data="list1" v-model="value1" @on-show="onShow" @on-hide="onHide" @on-change="onChange" :placeholder="$t('please select')"></popup-picker>-->
     </div>
     <div class="item">
       <img class="img" src="../assets/bussiness-man.svg">
@@ -101,7 +101,9 @@ export default {
       visitTime: '2020-01-01 00:00',
       phoneNumber: '',
       listCompany: [],
-      value1: ["请选择拜访单位"],
+      selectCompanyName: ["请选择拜访单位"],
+      selectCompanyId: '',
+      proprietorList: [],
     }
   },
   methods: {
@@ -133,8 +135,8 @@ export default {
           "type": "visitor-property"
         },
         "proprietor": {
-          "id": this.value1[0],
-          "name": this.value1[0],
+          "id": this.selectCompanyId,
+          "name": this.selectCompanyName[0],
           "type": "visitor-proprietor"
         },
         "interviewee": {
@@ -152,8 +154,6 @@ export default {
         "beginTime": this.visitTime,
         "endTime": "2028-5-11 18:00"
       }
-
-
       console.log(jsonParams)
 
       HttpUtil.post_json(Common.job_form, jsonParams).then(
@@ -166,11 +166,13 @@ export default {
 
       // this.$router.push('/invitationRegister')
 
-    }, getImg: function () {
+    },
+    getImg: function () {
       this.$refs.getUserImg.click()
       // document.getElementById("getUserImg").click()
       // document.getElementById("getUserImg").style.display="inline";
-    }, imgUrl: function () {
+    },
+    imgUrl: function () {
       // console.log("11")
       // console.log(this.$refs.getUserImg.files[0].name)
       // console.log(this.$refs.getUserImg.files)
@@ -202,7 +204,14 @@ export default {
     },
     onChange(val) {
       console.log('val change', val)
-      console.log(this.value1)
+      this.proprietorList.forEach(p => {
+          if (val[0] === p['name']) {
+            this.selectCompanyId = p['id']
+          }
+        }
+      )
+      console.log(this.selectCompanyId)
+      // console.log(this.value1)
     },
     onShow() {
       console.log('on show')
@@ -210,20 +219,13 @@ export default {
     onHide(type) {
       console.log('on hide', type)
     }
-
   }, created() {
     HttpUtil.get(Common.proprietor_url, {}).then(r => {
-        r['proprietorList'].forEach(e=>{
-          this.listCompany.push({
-            "name":e['name'],
-            "value":e['id'],
-          })
-          console.log(e)
-        })
-
-      console.log(this.listCompany.length)
-      console.log(this.listCompany)
-
+      this.proprietorList = r['proprietorList']
+      r['proprietorList'].forEach(e => {
+        this.listCompany.push(e['name'])
+        console.log(e)
+      })
     })
   }
 }
