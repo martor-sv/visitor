@@ -104,6 +104,7 @@ export default {
       selectCompanyName: ["请选择拜访单位"],
       selectCompanyId: '',
       proprietorList: [],
+      fileKey:''
     }
   },
   methods: {
@@ -149,7 +150,7 @@ export default {
           "name": this.name,
           "mobile": this.phoneNumber,
           "idCardSn": this.idCardSn,
-          "photoKey": "dev//visitor-service/2021-04-22/15/10065/2021-04-22/ddIFHM9Z4EakREwX"
+          "photoKey": this.fileKey
         },
         "beginTime": this.visitTime,
         "endTime": "2028-5-11 18:00"
@@ -160,6 +161,10 @@ export default {
         this.$vux.toast.text('请选择公司', 'center')
         return
       }
+      if (this.fileKey==''){
+        this.$vux.toast.text('请上传图片', 'center')
+        return
+      }
       wxmp.creatVisitor(jsonParams).then(
         r => {
           if (r['code'] === 200000000) {
@@ -168,7 +173,6 @@ export default {
           }
         }
       )
-
       // this.$router.push('/invitation**Register')
 
     },
@@ -178,12 +182,12 @@ export default {
       // document.getElementById("getUserImg").style.display="inline";
     },
     imgUrl: function () {
-      // console.log("11")
-      // console.log(this.$refs.getUserImg.files[0].name)
-      // console.log(this.$refs.getUserImg.files)
-      // this.$refs.visitTime.value = "123";
-      // console.log(this.$refs.visitTime)
+     wxmp.uploadImages(this.$refs.getUserImg.files[0]).then(r=>{
+       this.fileKey=r["resultList"][0]["fileKey"]
+       console.log(r["resultList"][0]["fileKey"])
+     })
 
+      // console.log(this.$refs.getUserImg.files[0].name)
     },
     showPlugin() {
       const that = this

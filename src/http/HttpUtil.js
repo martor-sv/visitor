@@ -104,6 +104,28 @@ export function axios_post_json(url, params) {
   })
 }
 
+export function file_post(url, params) {
+  let imageFormData = new FormData()
+  imageFormData.append("images",params)
+  return new Promise((resolve, reject) => {
+    service
+      .post(url, imageFormData)
+      .then(
+        response => {
+          resolve(response.data)
+        },
+        err => {
+          reject(err)
+        }
+      )
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
+
+
 // body参数对应delete
 export function axios_delete(url, params) {
   return new Promise((resolve, reject) => {
@@ -158,4 +180,7 @@ export default {
   put: function (url, params) {
     return axios_put(url, params)
   },
+  file_post:function (url, params) {
+    return file_post(url, params)
+  }
 }
