@@ -156,15 +156,20 @@ export default {
       }
       console.log(jsonParams)
 
-      HttpUtil.post_json(Common.job_form, jsonParams).then(
+      if (this.selectCompanyId==''){
+        this.$vux.toast.text('请选择公司', 'center')
+        return
+      }
+      wxmp.creatVisitor(jsonParams).then(
         r => {
           if (r['code'] === 200000000) {
             console.log("创建成功")
+
           }
         }
       )
 
-      // this.$router.push('/invitationRegister')
+      // this.$router.push('/invitation**Register')
 
     },
     getImg: function () {
@@ -220,7 +225,7 @@ export default {
       console.log('on hide', type)
     }
   }, created() {
-    HttpUtil.get(Common.proprietor_url, {}).then(r => {
+    wxmp.getCompany({}).then(r => {
       this.proprietorList = r['proprietorList']
       r['proprietorList'].forEach(e => {
         this.listCompany.push(e['name'])

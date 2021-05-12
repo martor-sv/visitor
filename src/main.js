@@ -20,9 +20,14 @@ Vue.use(VueRouter)
 
 Vue.use(WechatPlugin)
 
-// import * as VConsole from "vconsole";
+//初始化 VConsole
+import * as VConsole from "vconsole";
+const vConsole = new VConsole();
 
-// var vConsole = new VConsole()
+//初始化 toast
+import { ToastPlugin } from 'vux'
+Vue.use(ToastPlugin)
+
 
 const routes = [{
   // path: '/visitor',

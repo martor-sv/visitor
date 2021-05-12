@@ -1,21 +1,15 @@
 import HttpUtil from "../http/HttpUtil";
 import {Common} from "./common";
 
-export default {
 
-  // 获取微信openId
-  getOpenID(params) {
-    return HttpUtil.get(Common.web_url, params)
-  },
+export function creatVisitor(params) {
+  return HttpUtil.post_json(Common.job_form, params)
+}
 
-  //创建访客
-  creatVisitor:function(params) {
-    return  HttpUtil.post_json(Common.job_form, params)
-  },
+export function getCompany(params) {
+  return HttpUtil.get(Common.proprietor_url, params)
+}
 
-    getCompany :function(params) {
-    return HttpUtil.get(Common.proprietor_url,params)
-  }
-
-
+export function getOpenID(params) {
+  return HttpUtil.get(Common.web_url, params)
 }

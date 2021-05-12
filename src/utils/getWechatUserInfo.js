@@ -1,5 +1,4 @@
-import wxmp from "../api/wxmp";
-
+const wxmp = require("../api/wxmp");
 
 function GetQueryString(name) {
   const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
