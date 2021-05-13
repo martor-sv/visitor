@@ -11,8 +11,9 @@ import CodeView from "./components/CodeView";
 import InviteCodeView from "./components/InviteCodeView";
 import AuditVisit from "./components/AuditVisit";
 import Approved from "./components/Approved";
-import {WechatPlugin} from 'vux'
-import { DatetimePlugin } from 'vux'
+//初始化 toast
+import {DatetimePlugin, ToastPlugin, WechatPlugin} from 'vux'
+import NavigerView from "./components/NavigerView";
 
 Vue.use(DatetimePlugin)
 
@@ -23,16 +24,13 @@ Vue.use(WechatPlugin)
 //初始化 VConsole
 // import * as VConsole from "vconsole";
 // const vConsole = new VConsole();
-
-//初始化 toast
-import { ToastPlugin } from 'vux'
 Vue.use(ToastPlugin)
 
 
 const routes = [{
   // path: '/visitor',
   path: '/',
-  component: Home
+  component: NavigerView
 }, {
   path: '/registration',
   component: Registration
@@ -51,6 +49,9 @@ const routes = [{
 }, {
   path: '/Approved',
   component: Approved
+},{
+  path: '/Home',
+  component: Home
 },
 ]
 

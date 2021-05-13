@@ -35,6 +35,7 @@
 <script>
 import {Divider, Scroller, XInput} from "vux";
 import QRCode from 'qrcodejs2'
+import * as wxmp from "../api/wxmp";
 
 export default {
   name: "CodeView",
@@ -45,16 +46,22 @@ export default {
     nativetoinvite: function () {
       this.$router.push("/inviteCodeView")
     }, creatQrCode() {
-      var img_code = new QRCode(this.$refs.qrCodeUrl, {
+      const img_code = new QRCode(this.$refs.qrCodeUrl, {
         text: 'https://www.baidu.com',
         width: 240,
         height: 240,
         colorDark: '#000000',
         colorLight: '#ffffff',
         correctLevel: QRCode.CorrectLevel.H
-      })
+      });
     }
   }, mounted() {
+
+    wxmp.getVisitorCode().then(r => {
+
+    })
+
+
     this.creatQrCode();
   }
 }

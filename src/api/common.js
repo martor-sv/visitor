@@ -18,6 +18,9 @@ export class Common {
   //上传多张图片
   static file_image_url="/api1/visitor-service/file/image"
 
+  //查找访客证
+  static job_papers_url="/api1/visitor-service/job/papers"
+
 
 
 }

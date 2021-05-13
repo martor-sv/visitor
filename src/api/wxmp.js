@@ -38,3 +38,14 @@ export function uploadImages(params) {
   return HttpUtil.file_post(Common.file_image_url, params)
 }
 
+/**
+ * 获取访客证
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export function getVisitorCode(params) {
+  return HttpUtil.get(Common.job_papers_url, params)
+}
+
+
+

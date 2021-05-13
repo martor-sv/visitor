@@ -54,6 +54,14 @@
       <!--      <span ref="visitTime" @click.native="showPlugin">选择时间</span>-->
     </div>
     <div class="item">
+      <img class="img" src="../assets/on-time-shipment.svg">
+      <!--      <span style="margin-left: 15px">来访时间  &nbsp</span>-->
+      <XInput class="input" ref="leaveTime" title="离开时间" disabled placeholder="2020-01-01 00:01"
+              @click.native="showLeavePlugin" v-model="leaveTime">
+      </XInput>
+      <!--      <span ref="visitTime" @click.native="showPlugin">选择时间</span>-->
+    </div>
+    <div class="item">
       <img class="img" src="../assets/help.svg">
       <span style="margin-left: 15px">来访事由</span>
 
@@ -99,6 +107,7 @@ export default {
       view_type: '',
       hourListValue: '',
       visitTime: '2020-01-01 00:00',
+      leaveTime: '2020-01-01 00:01',
       phoneNumber: '',
       listCompany: [],
       selectCompanyName: ["请选择拜访单位"],
@@ -112,6 +121,11 @@ export default {
      * 提交访客申请
      */
     submit: function () {
+
+      this.$router.push('/invitationRegister')
+      return;
+
+
       let memo;
       switch (this.view_type.toString()) {
         case "1": {
@@ -153,7 +167,7 @@ export default {
           "photoKey": this.fileKey
         },
         "beginTime": this.visitTime,
-        "endTime": "2028-5-11 18:00"
+        "endTime": this.leaveTime
       }
       console.log(jsonParams)
 
@@ -197,7 +211,6 @@ export default {
         format: 'YYYY-MM-DD HH:mm',
         value: '2021-01-01 00:00',
         onConfirm(val) {
-          // this.$set(this.visitTime,val)
           that.visitTime = val
           that.$refs.visitTime.value = val;
           console.log(that.visitTime)
@@ -211,6 +224,29 @@ export default {
         }
       })
     },
+    showLeavePlugin() {
+      const that = this
+      this.$vux.datetime.show({
+        cancelText: '取消',
+        confirmText: '确定',
+        format: 'YYYY-MM-DD HH:mm',
+        value: '2021-01-01 00:00',
+        onConfirm(val) {
+          // this.$set(this.visitTime,val)
+          that.leaveTime = val
+          that.$refs.leaveTime.value = val;
+          console.log(that.leaveTime)
+          console.log('plugin confirm', val)
+        },
+        onShow() {
+          console.log('plugin show')
+        },
+        onHide() {
+          console.log('plugin hide')
+        }
+      })
+    },
+
     onChange(val) {
       console.log('val change', val)
       this.proprietorList.forEach(p => {

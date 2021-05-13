@@ -47,6 +47,7 @@
 
 <script>
 import {Divider, XInput} from "vux";
+import * as wxmp from "../api/wxmp";
 
 export default {
   name: "InviteCodeView",
@@ -54,6 +55,7 @@ export default {
     XInput, Divider
   },methods:{
     InviteCodeView:function () {
+
       this.$router.push("/auditVisit")
     }
   }
