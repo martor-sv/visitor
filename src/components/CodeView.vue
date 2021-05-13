@@ -5,7 +5,7 @@
       <img class="head_img"
            src="https://infinityicon.infinitynewtab.com/user-share-icon/3a9abce9ff5c6d6f6fa07c3eb60a2805.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim">
 
-      <span class="user_name" ref="user_name">关小羽</span>
+      <span class="user_name">{{this.userName}}</span>
 
       <span style="display: block;text-align: center;color:#A29C9C;margin-top: 10px">访客凭证</span>
 
@@ -15,17 +15,17 @@
     <div class="view_info">
       <div class="item">
         <img class="img" src="../assets/add-account.svg">
-        <XInput class="input" title="被访人" value="王家卫" readonly="readonly" :show-clear="false">
+        <XInput class="input" title="被访人" :value="intervieweeName" readonly="readonly" :show-clear="false">
         </XInput>
       </div>
       <div class="item">
         <img class="img" src="../assets/on-time-shipment.svg">
-        <XInput class="input" title="登记时间" value="2020-11-19" readonly="readonly" :show-clear="false">
+        <XInput class="input" title="登记时间" :value="createTime" readonly="readonly" :show-clear="false">
         </XInput>
       </div>
       <divider style="height: 1px;width:100%"></divider>
       <span style="margin-left: 30px">上海市闵行区紫星路588号1号楼902室</span>
-      <span style="padding-top:20px;margin-left: 30px">联系电话：<span style="color: #1890FF" @click="nativetoinvite">13100000000</span></span>
+      <span style="padding-top:20px;margin-left: 30px">联系电话：<span style="color: #1890FF" @click="nativetoinvite">{{ this.mobile }}</span></span>
 
     </div>
 
@@ -41,6 +41,14 @@ export default {
   name: "CodeView",
   components: {
     XInput, Divider, Scroller,
+  },
+  data(){
+    return{
+      "mobile":'',
+      "userName":'',
+      "intervieweeName":'',
+      "createTime":'',
+    }
   },
   methods: {
     nativetoinvite: function () {
@@ -59,7 +67,8 @@ export default {
     wxmp.getVisitorCode().then(r => {
       console.log(r)
       console.log(r["papersList"][0])
-      this.$refs.user_name.innerHTML =r["papersList"][0]['visitor']['name']
+
+      this.userName=r["papersList"][0]['visitor']['name']
       new QRCode(this.$refs.qrCodeUrl, {
         text: r["papersList"][0]['qrCode']['metadata'],
         width: 240,
@@ -68,6 +77,13 @@ export default {
         colorLight: '#ffffff',
         correctLevel: QRCode.CorrectLevel.H
       });
+
+      wxmp.getJobDetail({"jobIds":r["papersList"][0]['jobId']}).then(r=>{
+        console.log(r)
+        this.mobile=r['job']['interviewee']['mobile']
+        this.intervieweeName=r['job']['interviewee']['name']
+        this.createTime=r['job']['createTime'].substr(0,10)
+      })
 
     })
 

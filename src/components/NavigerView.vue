@@ -14,6 +14,8 @@
 
     <XButton type="primary" action-type="button" @click.native="auditVisit">审核</XButton>
 
+    <XButton type="primary" action-type="button" @click.native="approved">审核通过</XButton>
+
   </div>
 
 
@@ -38,12 +40,15 @@ export default {
     },
     invitationRegister: function () {
       this.$router.push('/InvitationRegister')
-    } ,
+    },
     codeView: function () {
       this.$router.push('/CodeView')
     },
     auditVisit: function () {
       this.$router.push('/auditVisit')
+    },
+    approved: function () {
+      this.$router.push('/Approved')
     }
   }
 

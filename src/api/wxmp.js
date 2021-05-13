@@ -47,5 +47,14 @@ export function getVisitorCode(params) {
   return HttpUtil.get(Common.job_papers_url, params)
 }
 
+/**
+ * 查找访客工单
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export function getJobDetail(params) {
+  return HttpUtil.get(Common.job_url, params)
+}
+
 
 

@@ -21,6 +21,9 @@ export class Common {
   //查找访客证
   static job_papers_url="/api1/visitor-service/job/papers"
 
+  //查找访客工单
+  static job_url="/api1/visitor-service/job"
+
 
 
 }
