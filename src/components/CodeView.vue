@@ -5,7 +5,7 @@
       <img class="head_img"
            src="https://infinityicon.infinitynewtab.com/user-share-icon/3a9abce9ff5c6d6f6fa07c3eb60a2805.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim">
 
-      <span class="user_name">关小羽</span>
+      <span class="user_name" ref="user_name">关小羽</span>
 
       <span style="display: block;text-align: center;color:#A29C9C;margin-top: 10px">访客凭证</span>
 
@@ -56,13 +56,22 @@ export default {
       });
     }
   }, mounted() {
-
     wxmp.getVisitorCode().then(r => {
+      console.log(r)
+      console.log(r["papersList"][0])
+      this.$refs.user_name.innerHTML =r["papersList"][0]['visitor']['name']
+      new QRCode(this.$refs.qrCodeUrl, {
+        text: r["papersList"][0]['qrCode']['metadata'],
+        width: 240,
+        height: 240,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
 
     })
 
-
-    this.creatQrCode();
+    // this.creatQrCode();
   }
 }
 </script>
