@@ -38,11 +38,11 @@ export default {
       console.log(this.input_code)
 
       // log(input_code)
-      this.$router.push('/Registration')
+      // this.$router.push('/Registration')
 
     },
   }, created() {
-    // empower();
+    empower();
     window.localStorage.setItem('accessToken', "eyJhbGciOiJIbWFjU0hBMjU2IiwidHlwIjoiVFYifQ.eyJ1aWQiOiJkYjFlZmEwZC0wOWVmLTRhOGYtOTRmOC0wZDhkMzc1MjU1OWUiLCJuYW1lIjoi5YWs5Y-4566h55CG5ZGYIiwibmJmIjoiMjAyMS0wNS0xMyAxMDo0OTowMS4yOTkiLCJpYXQiOiIyMDIxLTA1LTEzIDEwOjQ5OjAxLjI5OSJ9.CxiCyFQ_ypNFg3qOv1rIfcNGn4F_KgCH14uKDD3nCPw")
     // cookie.set('accessToken', "eyJhbGciOiJIbWFjU0hBMjU2IiwidHlwIjoiVFYifQ.eyJ1aWQiOiJkYjFlZmEwZC0wOWVmLTRhOGYtOTRmOC0wZDhkMzc1MjU1OWUiLCJuYW1lIjoi5YWs5Y-4566h55CG5ZGYIiwibmJmIjoiMjAyMS0wNS0xMSAxMDozNTo0Mi40MjIiLCJpYXQiOiIyMDIxLTA1LTExIDEwOjM1OjQyLjQyMiJ9.pQL8dUbJTQBD83j5A9-Gh83o7MbPlkNoxwrbSBpZf0o")
   }

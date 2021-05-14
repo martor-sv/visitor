@@ -162,7 +162,7 @@ export default {
 
       console.log(jsonParams)
 
-      this.$router.push('/codeView')
+      // this.$router.push('/codeView')
     },
     showPlugin() {
       const that = this

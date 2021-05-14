@@ -122,8 +122,8 @@ export default {
      */
     submit: function () {
 
-      this.$router.push('/invitationRegister')
-      return;
+      // this.$router.push('/invitationRegister')
+      // return;
 
 
       let memo;

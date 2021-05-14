@@ -62,7 +62,7 @@ export default {
     Cell, XButton
   }, methods: {
     reject: function () {
-      this.$router.push('/Approved')
+      // this.$router.push('/Approved')
       alert("拒绝")
     }, accept: function () {
 

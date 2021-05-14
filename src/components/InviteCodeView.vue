@@ -56,7 +56,7 @@ export default {
   },methods:{
     InviteCodeView:function () {
 
-      this.$router.push("/auditVisit")
+      // this.$router.push("/auditVisit")
     }
   }
 }

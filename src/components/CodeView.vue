@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     nativetoinvite: function () {
-      this.$router.push("/inviteCodeView")
+      // this.$router.push("/inviteCodeView")
     }, creatQrCode() {
       const img_code = new QRCode(this.$refs.qrCodeUrl, {
         text: 'https://www.baidu.com',
