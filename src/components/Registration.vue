@@ -287,6 +287,8 @@ export default {
 }
 
 .item {
+  width: 100%;
+  display: inline-flex;
 }
 
 .getUserImg {
@@ -330,6 +332,15 @@ export default {
   color: white;
   background-color: #1890FF;
   border: 1px solid green;
+}
+
+/deep/ .weui-cell_access{
+
+}
+/deep/ .vux-cell-box{
+  width: 80%;
+  margin-right: 10%;
+
 }
 
 </style>
