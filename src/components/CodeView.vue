@@ -36,6 +36,7 @@
 import {Divider, Scroller, XInput} from "vux";
 import QRCode from 'qrcodejs2'
 import * as wxmp from "../api/wxmp";
+import {empower} from "../utils/getWechatUserInfo";
 
 export default {
   name: "CodeView",
@@ -64,6 +65,7 @@ export default {
       });
     }
   }, mounted() {
+    empower("/CodeView");
     wxmp.getVisitorCode().then(r => {
       console.log(r)
       console.log(r["papersList"][0])

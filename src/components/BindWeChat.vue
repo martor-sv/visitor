@@ -43,7 +43,7 @@ export default {
     },
   }, created() {
     empower();
-    window.localStorage.setItem('accessToken', "eyJhbGciOiJIbWFjU0hBMjU2IiwidHlwIjoiVFYifQ.eyJ1aWQiOiJkYjFlZmEwZC0wOWVmLTRhOGYtOTRmOC0wZDhkMzc1MjU1OWUiLCJuYW1lIjoi5YWs5Y-4566h55CG5ZGYIiwibmJmIjoiMjAyMS0wNS0xMyAxMDo0OTowMS4yOTkiLCJpYXQiOiIyMDIxLTA1LTEzIDEwOjQ5OjAxLjI5OSJ9.CxiCyFQ_ypNFg3qOv1rIfcNGn4F_KgCH14uKDD3nCPw")
+    // window.localStorage.setItem('accessToken', "eyJhbGciOiJIbWFjU0hBMjU2IiwidHlwIjoiVFYifQ.eyJ1aWQiOiJkYjFlZmEwZC0wOWVmLTRhOGYtOTRmOC0wZDhkMzc1MjU1OWUiLCJuYW1lIjoi54mp5Lia5YWs5Y-4566h55CG5ZGYIiwibmJmIjoiMjAyMS0wNS0xNCAxMzozNzoyNS43ODIiLCJpYXQiOiIyMDIxLTA1LTE0IDEzOjM3OjI1Ljc4MiJ9.pdlfSq45QZ9ue-OTtjtDsbCKEyVZQQIRtVZ1xo2fci0")
     // cookie.set('accessToken', "eyJhbGciOiJIbWFjU0hBMjU2IiwidHlwIjoiVFYifQ.eyJ1aWQiOiJkYjFlZmEwZC0wOWVmLTRhOGYtOTRmOC0wZDhkMzc1MjU1OWUiLCJuYW1lIjoi5YWs5Y-4566h55CG5ZGYIiwibmJmIjoiMjAyMS0wNS0xMSAxMDozNTo0Mi40MjIiLCJpYXQiOiIyMDIxLTA1LTExIDEwOjM1OjQyLjQyMiJ9.pQL8dUbJTQBD83j5A9-Gh83o7MbPlkNoxwrbSBpZf0o")
   }
 

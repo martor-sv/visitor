@@ -1,3 +1,5 @@
+import {Config} from "../api/Config";
+
 const wxmp = require("../api/wxmp");
 
 function GetQueryString(name) {
@@ -8,23 +10,29 @@ function GetQueryString(name) {
 }
 
 //微信用户授权
-let empower = () => {
+let empower = function (pageName)  {
   const code = GetQueryString("code");
   const state = GetQueryString("state");
 
   if (code != null) {
     console.log("code="+code)
     console.log("state="+state)
-    const params =new Map()
-    params["code"]=code
-    params["originId"]="gh_33d8ba02daec"
-    wxmp.getOpenID(params).then(r =>{
-      console.log(r)
+
+    wxmp.getOpenID({
+      "code":code,
+      "originId":state,
+    }).then(r =>{
+        window.localStorage.setItem('accessToken', r['platformAccessToken'])
+        window.localStorage.setItem('wxOpenId', r['wxOpenId'])
+        window.localStorage.setItem('wxUnionId', r['wxUnionId'])
+        console.log(r)
     }
     )
-  } else {
+  }
+  else {
     //授权微信 获取code 使用code 来换取用户信息
-    window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx93319a39b2c03f28&redirect_uri=http%3a%2f%2fwww.silverwind.tech%2fvisitor&response_type=code&scope=snsapi_userinfo&state=gh_33d8ba02daec#wechat_redirect";
+    let callbackUrl = encodeURIComponent('http://192.168.5.8:8081/#'+pageName);
+    window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${Config.appId}&redirect_uri=${callbackUrl}&response_type=code&scope=snsapi_userinfo&state=gh_33d8ba02daec#wechat_redirect`;
   }
 }
 

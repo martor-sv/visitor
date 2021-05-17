@@ -82,6 +82,7 @@
 import {Checker, CheckerItem, Datetime, PopupPicker, XButton, XInput} from 'vux'
 import HttpUtil from "../http/HttpUtil";
 import {Common} from "../api/common";
+import {empower} from "../utils/getWechatUserInfo";
 
 const wxmp = require("../api/wxmp");
 // import 'weui-icon/dist/filled/add-friends.css';
@@ -265,6 +266,8 @@ export default {
       console.log('on hide', type)
     }
   }, created() {
+    empower("/Registration");
+
     wxmp.getCompany({}).then(r => {
       this.proprietorList = r['proprietorList']
       r['proprietorList'].forEach(e => {
