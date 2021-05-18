@@ -10,28 +10,30 @@ function GetQueryString(name) {
 }
 
 //微信用户授权
-let empower = function (pageName)  {
+let empower = function (pageName) {
+  // 获取路由上的参数
   const code = GetQueryString("code");
   const state = GetQueryString("state");
 
   if (code != null) {
-    console.log("code="+code)
-    console.log("state="+state)
+    console.log("code=" + code)
+    console.log("state=" + state)
 
     wxmp.getOpenID({
-      "code":code,
-      "originId":state,
-    }).then(r =>{
-        window.localStorage.setItem('accessToken', r['platformAccessToken'])
-        window.localStorage.setItem('wxOpenId', r['wxOpenId'])
-        window.localStorage.setItem('wxUnionId', r['wxUnionId'])
+      "code": code,
+      "originId": state,
+    }).then(r => {
+        window.localStorage.setItem(Config.accessToken, r['platformAccessToken'])
+        window.localStorage.setItem(Config.wxOpenId, r['wxOpenId'])
+        window.localStorage.setItem(Config.wxUnionId, r['wxUnionId'])
+        window.localStorage.setItem(Config.personId, r['personId'])
         console.log(r)
-    }
+      }
     )
-  }
-  else {
+  } else {
+    //url 编码
+    let callbackUrl = encodeURIComponent(Config.baseUrl + pageName);
     //授权微信 获取code 使用code 来换取用户信息
-    let callbackUrl = encodeURIComponent('http://192.168.5.8:8081/#'+pageName);
     window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${Config.appId}&redirect_uri=${callbackUrl}&response_type=code&scope=snsapi_userinfo&state=gh_33d8ba02daec#wechat_redirect`;
   }
 }

@@ -80,9 +80,8 @@
 
 <script>
 import {Checker, CheckerItem, Datetime, PopupPicker, XButton, XInput} from 'vux'
-import HttpUtil from "../http/HttpUtil";
-import {Common} from "../api/common";
 import {empower} from "../utils/getWechatUserInfo";
+import {Config} from "../api/Config";
 
 const wxmp = require("../api/wxmp");
 // import 'weui-icon/dist/filled/add-friends.css';
@@ -114,7 +113,7 @@ export default {
       selectCompanyName: ["请选择拜访单位"],
       selectCompanyId: '',
       proprietorList: [],
-      fileKey:''
+      fileKey: ''
     }
   },
   methods: {
@@ -156,11 +155,11 @@ export default {
           "type": "visitor-proprietor"
         },
         "interviewee": {
-          "name": "张",
+          "name": this.interviewName,
           "mobile": "19946068451"
         },
         "leader": {
-          "visitorId": "1000086",
+          "visitorId": window.localStorage.getItem(Config.personId),
           "companyName": this.leaderCompanyName,
           "name": this.name,
           "mobile": this.phoneNumber,
@@ -172,11 +171,11 @@ export default {
       }
       console.log(jsonParams)
 
-      if (this.selectCompanyId==''){
+      if (this.selectCompanyId == '') {
         this.$vux.toast.text('请选择公司', 'center')
         return
       }
-      if (this.fileKey==''){
+      if (this.fileKey == '') {
         this.$vux.toast.text('请上传图片', 'center')
         return
       }
@@ -197,10 +196,10 @@ export default {
       // document.getElementById("getUserImg").style.display="inline";
     },
     imgUrl: function () {
-     wxmp.uploadImages(this.$refs.getUserImg.files[0]).then(r=>{
-       this.fileKey=r["resultList"][0]["fileKey"]
-       console.log(r["resultList"][0]["fileKey"])
-     })
+      wxmp.uploadImages(this.$refs.getUserImg.files[0]).then(r => {
+        this.fileKey = r["resultList"][0]["fileKey"]
+        console.log(r["resultList"][0]["fileKey"])
+      })
 
       // console.log(this.$refs.getUserImg.files[0].name)
     },
@@ -334,10 +333,11 @@ export default {
   border: 1px solid green;
 }
 
-/deep/ .weui-cell_access{
+/deep/ .weui-cell_access {
 
 }
-/deep/ .vux-cell-box{
+
+/deep/ .vux-cell-box {
   width: 80%;
   margin-right: 10%;
 
