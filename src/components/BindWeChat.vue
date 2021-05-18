@@ -16,7 +16,7 @@
 
 
 import {empower} from "../utils/getWechatUserInfo";
-import {cookie} from "vux";
+import {cookie, dateFormat} from "vux";
 
 const {XInput} = require("vux");
 
@@ -31,7 +31,7 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      input_code: ''
+      input_code: '',
     }
   }, methods: {
     login: function () {
@@ -42,7 +42,7 @@ export default {
 
     },
   }, created() {
-    empower();
+    // empower();
     // window.localStorage.setItem('accessToken', "eyJhbGciOiJIbWFjU0hBMjU2IiwidHlwIjoiVFYifQ.eyJ1aWQiOiJkYjFlZmEwZC0wOWVmLTRhOGYtOTRmOC0wZDhkMzc1MjU1OWUiLCJuYW1lIjoi54mp5Lia5YWs5Y-4566h55CG5ZGYIiwibmJmIjoiMjAyMS0wNS0xNCAxMzozNzoyNS43ODIiLCJpYXQiOiIyMDIxLTA1LTE0IDEzOjM3OjI1Ljc4MiJ9.pdlfSq45QZ9ue-OTtjtDsbCKEyVZQQIRtVZ1xo2fci0")
     // cookie.set('accessToken', "eyJhbGciOiJIbWFjU0hBMjU2IiwidHlwIjoiVFYifQ.eyJ1aWQiOiJkYjFlZmEwZC0wOWVmLTRhOGYtOTRmOC0wZDhkMzc1MjU1OWUiLCJuYW1lIjoi5YWs5Y-4566h55CG5ZGYIiwibmJmIjoiMjAyMS0wNS0xMSAxMDozNTo0Mi40MjIiLCJpYXQiOiIyMDIxLTA1LTExIDEwOjM1OjQyLjQyMiJ9.pQL8dUbJTQBD83j5A9-Gh83o7MbPlkNoxwrbSBpZf0o")
   }

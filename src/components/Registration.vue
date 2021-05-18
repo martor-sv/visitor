@@ -21,13 +21,13 @@
                     @on-change="onChange" placeholder="请选择拜访单位"></popup-picker>
     </div>
     <div class="item">
-      <img class="img" src="../assets/bussiness-man.svg">
-      <XInput class="input" title="您的姓名" placeholder="请输入您的姓名" :show-clear="false" v-model="name">
+      <img class="img" src="../assets/mobile-phone.svg">
+      <XInput class="input" type="tel" title="手机号码" placeholder="请输入被访问人的手机号"  :show-clear="false" v-model="phoneNumber">
       </XInput>
     </div>
     <div class="item">
-      <img class="img" src="../assets/mobile-phone.svg">
-      <XInput class="input" type="tel" title="手机号码" placeholder="请输入您的手机号码" :show-clear="false" v-model="phoneNumber">
+      <img class="img" src="../assets/bussiness-man.svg">
+      <XInput class="input" title="您的姓名" placeholder="请输入您的姓名" :show-clear="false" v-model="name">
       </XInput>
     </div>
     <div class="item">
@@ -48,7 +48,7 @@
     <div class="item">
       <img class="img" src="../assets/on-time-shipment.svg">
       <!--      <span style="margin-left: 15px">来访时间  &nbsp</span>-->
-      <XInput class="input" ref="visitTime" title="来访时间" disabled placeholder="2020-01-01 00:00"
+      <XInput class="input" ref="visitTime" title="来访时间" disabled :placeholder="visitTime"
               @click.native="showPlugin" v-model="visitTime">
       </XInput>
       <!--      <span ref="visitTime" @click.native="showPlugin">选择时间</span>-->
@@ -56,7 +56,7 @@
     <div class="item">
       <img class="img" src="../assets/on-time-shipment.svg">
       <!--      <span style="margin-left: 15px">来访时间  &nbsp</span>-->
-      <XInput class="input" ref="leaveTime" title="离开时间" disabled placeholder="2020-01-01 00:01"
+      <XInput class="input" ref="leaveTime" title="离开时间" disabled :placeholder="leaveTime"
               @click.native="showLeavePlugin" v-model="leaveTime">
       </XInput>
       <!--      <span ref="visitTime" @click.native="showPlugin">选择时间</span>-->
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import {Checker, CheckerItem, Datetime, PopupPicker, XButton, XInput} from 'vux'
+import {Checker, CheckerItem, dateFormat, Datetime, PopupPicker, XButton, XInput} from 'vux'
 import {empower} from "../utils/getWechatUserInfo";
 import {Config} from "../api/Config";
 
@@ -106,14 +106,14 @@ export default {
       interviewCompanyName: '',
       view_type: '',
       hourListValue: '',
-      visitTime: '2020-01-01 00:00',
-      leaveTime: '2020-01-01 00:01',
+      visitTime: '',
+      leaveTime: '',
       phoneNumber: '',
       listCompany: [],
       selectCompanyName: ["请选择拜访单位"],
       selectCompanyId: '',
       proprietorList: [],
-      fileKey: ''
+      fileKey: '',
     }
   },
   methods: {
@@ -124,6 +124,7 @@ export default {
 
       // this.$router.push('/invitationRegister')
       // return;
+      // 19946068451
 
 
       let memo;
@@ -156,13 +157,13 @@ export default {
         },
         "interviewee": {
           "name": this.interviewName,
-          "mobile": "19946068451"
+          "mobile": this.phoneNumber
         },
         "leader": {
           "visitorId": window.localStorage.getItem(Config.personId),
           "companyName": this.leaderCompanyName,
           "name": this.name,
-          "mobile": this.phoneNumber,
+          "mobile": "",
           "idCardSn": this.idCardSn,
           "photoKey": this.fileKey
         },
@@ -209,7 +210,7 @@ export default {
         cancelText: '取消',
         confirmText: '确定',
         format: 'YYYY-MM-DD HH:mm',
-        value: '2021-01-01 00:00',
+        value: this.visitTime,
         onConfirm(val) {
           that.visitTime = val
           that.$refs.visitTime.value = val;
@@ -230,7 +231,7 @@ export default {
         cancelText: '取消',
         confirmText: '确定',
         format: 'YYYY-MM-DD HH:mm',
-        value: '2021-01-01 00:00',
+        value: this.leaveTime,
         onConfirm(val) {
           // this.$set(this.visitTime,val)
           that.leaveTime = val
@@ -265,6 +266,11 @@ export default {
       console.log('on hide', type)
     }
   }, created() {
+    let newData = new Date();
+    this.visitTime =  dateFormat(newData)
+    newData.setHours(newData.getHours()+2)
+    this.leaveTime =  dateFormat(newData)
+
     empower("/Registration");
 
     wxmp.getCompany({}).then(r => {
