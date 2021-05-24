@@ -65,6 +65,11 @@ export default {
       });
     }
   }, mounted() {
+
+
+    // this.creatQrCode();
+  },created() {
+
     empower("/CodeView");
     wxmp.getVisitorCode().then(r => {
       console.log(r)
@@ -89,7 +94,6 @@ export default {
 
     })
 
-    // this.creatQrCode();
   }
 }
 </script>

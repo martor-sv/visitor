@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import {Checker, CheckerItem, dateFormat, Datetime, PopupPicker, XButton, XInput} from 'vux'
+import {Alert, Checker, CheckerItem, dateFormat, Datetime, PopupPicker, XButton, XInput} from 'vux'
 import {empower} from "../utils/getWechatUserInfo";
 import {Config} from "../api/Config";
 
@@ -183,7 +183,9 @@ export default {
       wxmp.creatVisitor(jsonParams).then(
         r => {
           if (r['code'] === 200000000) {
+            console.log(r)
             console.log("创建成功")
+            alert("创建成功")
 
           }
         }
@@ -197,9 +199,12 @@ export default {
       // document.getElementById("getUserImg").style.display="inline";
     },
     imgUrl: function () {
+      // const that = this
       wxmp.uploadImages(this.$refs.getUserImg.files[0]).then(r => {
         this.fileKey = r["resultList"][0]["fileKey"]
         console.log(r["resultList"][0]["fileKey"])
+      },function (result) {
+        alert("图片上传错误")
       })
 
       // console.log(this.$refs.getUserImg.files[0].name)
@@ -260,6 +265,13 @@ export default {
       // console.log(this.value1)
     },
     onShow() {
+      wxmp.getCompany({}).then(r => {
+        this.proprietorList = r['proprietorList']
+        r['proprietorList'].forEach(e => {
+          this.listCompany.push(e['name'])
+          console.log(e)
+        })
+      })
       console.log('on show')
     },
     onHide(type) {
@@ -271,15 +283,16 @@ export default {
     newData.setHours(newData.getHours()+2)
     this.leaveTime =  dateFormat(newData)
 
-    empower("/Registration");
-
-    wxmp.getCompany({}).then(r => {
-      this.proprietorList = r['proprietorList']
-      r['proprietorList'].forEach(e => {
-        this.listCompany.push(e['name'])
-        console.log(e)
-      })
-    })
+    // if (localStorage.getItem(Config.accessToken)==null){
+      empower("/Registration");
+    // }
+    // wxmp.getCompany({}).then(r => {
+    //   this.proprietorList = r['proprietorList']
+    //   r['proprietorList'].forEach(e => {
+    //     this.listCompany.push(e['name'])
+    //     console.log(e)
+    //   })
+    // })
   }
 }
 </script>

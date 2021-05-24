@@ -22,8 +22,8 @@ Vue.use(VueRouter)
 Vue.use(WechatPlugin)
 
 //初始化 VConsole
-// import * as VConsole from "vconsole";
-// const vConsole = new VConsole();
+import * as VConsole from "vconsole";
+const vConsole = new VConsole();
 
 Vue.use(ToastPlugin)
 

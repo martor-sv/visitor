@@ -34,11 +34,19 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
+    console.log(response.status)
+
     return response;
   }, function (error) {
+
+    ///todo  token 失效未处理
+    // if (error.toString().indexOf('422') !== -1) {
+    //   // console.log(11111)
+    // }
+
     return Promise.reject(error)
 
-  })
+  },)
 
 
 // export default service
@@ -106,7 +114,7 @@ export function axios_post_json(url, params) {
 
 export function file_post(url, params) {
   let imageFormData = new FormData()
-  imageFormData.append("images",params)
+  imageFormData.append("images", params)
   return new Promise((resolve, reject) => {
     service
       .post(url, imageFormData)
@@ -123,7 +131,6 @@ export function file_post(url, params) {
       })
   })
 }
-
 
 
 // body参数对应delete
@@ -180,7 +187,7 @@ export default {
   put: function (url, params) {
     return axios_put(url, params)
   },
-  file_post:function (url, params) {
+  file_post: function (url, params) {
     return file_post(url, params)
   }
 }
