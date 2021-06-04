@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {Config} from "../api/Config";
 // var host = process.env.NODE_ENV === 'development' ? 'http://' : '/_gataway';
 const service = axios.create({
   // baseURL: '/api/',
@@ -6,7 +7,8 @@ const service = axios.create({
   // baseURL: 'http://27.115.4.34:58700',  //研发
   // baseURL: 'http://192.168.4.16:10080',
   // baseURL: 'http://192.168.4.16:10080',
-  baseURL: "http://192.168.4.72:18700",
+  baseURL: "https://www.silverwind.tech/dev",
+
   timeout: 50000,
   headers: {
     // 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
@@ -19,14 +21,17 @@ const service = axios.create({
 // 拦截添加token
 service.interceptors.request.use(
   function (config) {
-    let token = window.localStorage.getItem("accessToken")
+    let token = window.localStorage.getItem(Config.accessToken)
+    let wxUnionId = window.localStorage.getItem(Config.wxUnionId)
     if (token) {
       //将token放到请求头发送给服务器,将tokenkey放在请求头中
       config.headers.accessToken = token;
-
-      //也可以这种写法
-      // config.headers['accessToken'] = Token;
     }
+    if (wxUnionId){
+      //将wxUnionId放到请求头发送给服务器,将tokenkey放在请求头中
+      config.headers.wxUnionId = wxUnionId;
+    }
+
     return config;
   }
 )
