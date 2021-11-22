@@ -5,9 +5,7 @@
     <div>
       <img class="img" src="../assets/smile.svg">
       <span style="margin-left: 15px">免冠照  &nbsp</span>
-      <!--      <XInput class="input" title="免冠 照" placeholder="请输入拜访人名称" :show-clear="false" v-model="interviewName">  </XInput>-->
-      <input class="getUserImg" ref="getUserImg" type="file" style="margin-left: 15px" v-on:change="imgUrl" multiple
-             accept="image/png,image/jpeg,image/gif,image/jpg">
+      <input title="选择"  ref="getUserImg"  type="file" id="take-picture" accept="image/*" v-on:change="imgUrl">
     </div>
     <div class="item">
       <img class="img" src="../assets/add-account.svg">
@@ -79,11 +77,12 @@
 </template>
 
 <script>
-import {Alert, Checker, CheckerItem, dateFormat, Datetime, PopupPicker, XButton, XInput} from 'vux'
+import {Alert, Checker, CheckerItem, dateFormat, Datetime, PopupPicker, WechatPlugin, XButton, XInput} from 'vux'
 import {empower} from "../utils/getWechatUserInfo";
 import {Config} from "../api/Config";
+import * as wxmp from "../api/wxmp";
 
-const wxmp = require("../api/wxmp");
+// const wxmp = require("../api/wxmp");
 // import 'weui-icon/dist/filled/add-friends.css';
 
 export default {
@@ -194,7 +193,26 @@ export default {
 
     },
     getImg: function () {
-      this.$refs.getUserImg.click()
+      console.log(11)
+      // WechatPlugin.$wechat.closeWindow();
+      // WechatPlugin.$wechat.config({
+      //   debug: false,
+      //   appId: _data.appId,
+      //   timestamp: _data.timestamp,
+      //   nonceStr: _data.nonceStr,
+      //   signature: _data.signature,
+      //   jsApiList: ['scanQRCode']
+      // });
+      //
+      // WechatPlugin.$wechat.scanQRCode({
+      //   needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+      //   scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+      //   success: function (res) {
+      //     var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+      //   }
+      // });
+
+      // this.$refs.getUserImg.click()
       // document.getElementById("getUserImg").click()
       // document.getElementById("getUserImg").style.display="inline";
     },

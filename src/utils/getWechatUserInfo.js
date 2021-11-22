@@ -19,22 +19,22 @@ let empower = function (pageName) {
     console.log("code=" + code)
     console.log("state=" + state)
 
-    wxmp.getOpenID({
-      "code": code,
-      "originId": state,
-    }).then(r => {
-        window.localStorage.setItem(Config.accessToken, r['platformAccessToken'])
-        window.localStorage.setItem(Config.wxOpenId, r['wxOpenId'])
-        window.localStorage.setItem(Config.wxUnionId, r['wxUnionId'])
-        window.localStorage.setItem(Config.personId, r['personId'])
-        console.log(r)
-      }
-    )
+    // wxmp.getOpenID({
+    //   "code": code,
+    //   "originId": state,
+    // }).then(r => {
+    //     window.localStorage.setItem(Config.accessToken, r['platformAccessToken'])
+    //     window.localStorage.setItem(Config.wxOpenId, r['wxOpenId'])
+    //     window.localStorage.setItem(Config.wxUnionId, r['wxUnionId'])
+    //     window.localStorage.setItem(Config.personId, r['personId'])
+    //     console.log(r)
+    //   }
+    // )
   } else {
     //url 编码
-    let callbackUrl = encodeURIComponent(Config.baseUrl + pageName);
+    // let callbackUrl = encodeURIComponent(Config.baseUrl + pageName);
     //授权微信 获取code 使用code 来换取用户信息
-    window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${Config.appId}&redirect_uri=${callbackUrl}&response_type=code&scope=snsapi_userinfo&state=gh_33d8ba02daec#wechat_redirect`;
+    // window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${Config.appId}&redirect_uri=${callbackUrl}&response_type=code&scope=snsapi_userinfo&state=gh_33d8ba02daec#wechat_redirect`;
   }
 }
 

@@ -7,7 +7,7 @@ const service = axios.create({
   // baseURL: 'http://27.115.4.34:58700',  //研发
   // baseURL: 'http://192.168.4.16:10080',
   // baseURL: 'http://192.168.4.16:10080',
-  baseURL: "https://www.silverwind.tech/dev",
+  baseURL: "https://lan.truthvision.com/dev",
 
   timeout: 50000,
   headers: {
